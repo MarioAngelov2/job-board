@@ -25,7 +25,7 @@ const Navbar = () => {
         <MaxWidthWrapper>
           <div className="flex border-b border-gray-200 pt-2 pb-2">
             <div className="flex lg:ml-0">
-              <Link to="/" className="font-black text-2xl">
+              <Link to="/" className="font-black text-3xl">
                 dev.
                 <span className="text-blue-600 hover:text-gray-900 transition duration-300 ease-in-out">
                   jobs

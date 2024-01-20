@@ -15,7 +15,7 @@ const FilterMenu = () => {
         <SeniorityList />
       </div>
       <div className="flex flex-col gap-3 mt-7">
-        <h1 className="font-semibold">Seniority</h1>
+        <h1 className="font-semibold">Salary</h1>
         <PriceList />
       </div>
       <div className="flex flex-col gap-3 mt-7">
