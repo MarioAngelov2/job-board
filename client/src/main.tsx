@@ -1,19 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
-import { ClerkProvider } from "@clerk/clerk-react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+import RootLayout from "./components/RootLayout";
+import DashboardLayout from "./components/DashboardLayout";
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key.");
-}
+import App from "./App.tsx";
+import SignInPage from "./pages/SignIn.tsx";
+import SignUpPage from "./pages/SignUp.tsx";
+import MyJobs from "./pages/MyJobs.tsx";
+import Home from "./pages/Home.tsx";
+
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/sign-in", element: <SignInPage /> },
+      { path: "/sign-up", element: <SignUpPage /> },
+      {
+        element: <DashboardLayout />,
+        path: "dashboard",
+        children: [{ path: "/dashboard/my-jobs", element: <MyJobs /> }],
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <App />
-    </ClerkProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
