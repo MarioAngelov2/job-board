@@ -11,6 +11,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import FilterMenu from "@/components/FilterMenu";
 
 const formSchema: z.ZodSchema<{ search: string; location: string }> = z.object({
   search: z.string(),
@@ -78,10 +79,17 @@ const Home = () => {
               )}
             />
             <Button className="w-[300px] md:w-[100px]" type="submit">
-              Submit
+              Search
             </Button>
           </form>
         </Form>
+      </div>
+      {/* FILTER MENU */}
+      <div className="lg:flex lg:flex-row lg:gap-6">
+        <FilterMenu />
+        <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-4 py-4">
+          sadsad
+        </div>
       </div>
     </MaxWidthWrapper>
   );
