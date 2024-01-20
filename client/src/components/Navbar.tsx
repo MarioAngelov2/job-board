@@ -23,7 +23,7 @@ const Navbar = () => {
     <div className="sticky z-50 top-0 inset-0 h-16">
       <header className="relative bg-white">
         <MaxWidthWrapper>
-          <div className="flex border-b border-gray-200 pt-2 pb-2">
+          <div className="flex pt-2 pb-2">
             <div className="flex lg:ml-0">
               <Link to="/" className="font-black text-3xl">
                 dev.
