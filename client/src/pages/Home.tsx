@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import FilterMenu from "@/components/FilterMenu";
+import Jobs from "@/components/Jobs";
 
 const formSchema: z.ZodSchema<{ search: string; location: string }> = z.object({
   search: z.string(),
@@ -87,9 +88,7 @@ const Home = () => {
       {/* FILTER MENU */}
       <div className="lg:flex lg:flex-row lg:gap-6">
         <FilterMenu />
-        <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-4 py-4">
-          sadsad
-        </div>
+        <Jobs />
       </div>
     </MaxWidthWrapper>
   );
