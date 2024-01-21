@@ -6,11 +6,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import DashboardLayout from "./components/DashboardLayout";
 
-import App from "./App.tsx";
 import SignInPage from "./pages/SignIn.tsx";
 import SignUpPage from "./pages/SignUp.tsx";
 import MyJobs from "./pages/MyJobs.tsx";
 import Home from "./pages/Home.tsx";
+import JobDetails from "./pages/JobDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/sign-in", element: <SignInPage /> },
       { path: "/sign-up", element: <SignUpPage /> },
+      { path: "/job/:id", element: <JobDetails /> },
       {
         element: <DashboardLayout />,
         path: "dashboard",
