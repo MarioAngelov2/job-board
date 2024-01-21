@@ -33,18 +33,18 @@ const Home = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="mt-12 md:mt-24">
-        <h1 className="text-3xl text-center font-semibold md:text-4xl md:text-start lg:text-5xl">
+      <div className="mt-12 md:mt-24 relative">
+        <h1 className="text-3xl text-center font-semibold md:text-4xl lg:text-start lg:text-5xl">
           Find your <span className="text-blue-600">new job</span> today
         </h1>
-        <p className="mt-3 text-slate-500 text-sm text-center md:text-start md:text-base">
+        <p className="mt-3 text-slate-500 text-sm text-center lg:text-start md:text-base">
           Thousands of jobs in the computer, engineering and technology sectors
           are waiting for you.
         </p>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-8 flex flex-col md:flex-row items-center gap-3 w-full"
+            className="mt-8 flex flex-col lg:flex-row items-center gap-3 w-full"
           >
             <FormField
               control={form.control}
@@ -53,7 +53,7 @@ const Home = () => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="w-[300px] md:w-[350px] lg:w-[550px] transition duration-300 ease-in-out"
+                      className="w-[300px] md:w-[600px] lg:w-[550px] transition duration-300 ease-in-out"
                       placeholder="What position you are looking for?"
                       {...field}
                     />
@@ -69,7 +69,7 @@ const Home = () => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="w-[300px] md:w-[200px] lg:w-[300px] transition duration-300 ease-in-out"
+                      className="w-[300px] md:w-[600px] lg:w-[300px] transition duration-300 ease-in-out"
                       placeholder="Location?"
                       {...field}
                     />
@@ -78,7 +78,7 @@ const Home = () => {
                 </FormItem>
               )}
             />
-            <Button className="w-[300px] md:w-[100px]" type="submit">
+            <Button className="w-[300px] md:w-[600px]" type="submit">
               Search
             </Button>
           </form>
