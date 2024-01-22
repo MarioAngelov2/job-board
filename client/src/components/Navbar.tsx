@@ -5,6 +5,13 @@ import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const links = [
   { title: "Post a job", href: "#" },
@@ -53,26 +60,23 @@ const Navbar = () => {
               </div>
             </div>
             {/* TODO MOBILE NAV */}
-            <div className="lg:hidden flex gap-6 items-center">
+            <div className="lg:hidden flex gap-4 items-center">
               <UserButton afterSignOutUrl="/sign-in" />
-              {open ? (
-                <IoCloseOutline
-                  className="text-4xl z-20"
-                  onClick={handleMobileMenu}
-                />
-              ) : (
-                <RxHamburgerMenu
-                  className="text-3xl z-10"
-                  onClick={handleMobileMenu}
-                />
-              )}
-              {open && (
-                <div className="absolute top-0 right-0 w-screen h-screen bg-gray-50">
-                  <div className="flex justify-start mt-4 ml-2">
-                    MOBILE MENU
-                  </div>
-                </div>
-              )}
+
+              {/* MOBILE */}
+              <Sheet>
+                <SheetTrigger>
+                  <RxHamburgerMenu
+                    onClick={handleMobileMenu}
+                    className="text-3xl"
+                  />
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetDescription>dasda</SheetDescription>
+                  </SheetHeader>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </MaxWidthWrapper>
