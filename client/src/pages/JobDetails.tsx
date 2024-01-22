@@ -8,7 +8,6 @@ import {
   CiHeart,
 } from "react-icons/ci";
 import { LuSend } from "react-icons/lu";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import jobData from "../mock/companyData.json";
 
 const JobDetails = () => {
