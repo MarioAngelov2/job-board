@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "logo": "/public/logo1.png",
+    "company": "DXC Technology",
+    "jobTitle": "Senior React Developer",
+    "location": "Sofia",
+    "employmentType": "Full-time",
+    "salaryRange": "2000-3000",
+    "datePosted": "2024-01-21",
+    "positionDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nisl non libero lacinia feugiat.",
+    "aboutUs": "We are DXC – a Fortune 500 global IT services leader. In Bulgaria, we are among the largest employers with over 4,000 employees working on the company’s entire IT portfolio. We are flexible – we provide everything you need to comfortably work from home, but we also keep our offices open for collaboration, meetings, and building a strong team spirit. We tailor everyone’s development path to their individual interests through training and additional certifications. Our experience and desire to grow, our mission, and our values create an environment where ambitious people become successful at home. At home – in Bulgaria.",
+    "tasks": "As a Senior Front-End Developer, you can be а part of many impactful projects in the public sector and therefore make a true difference to the world. From developing a web application that enables a revolutionary way to attend a driver license exam to providing a new information system that could rationalize clinical studies, patients’ clinical data and prescriptions monitoring.",
+    "requirements": [
+      "5+ years of professional experience as a Front-End developer",
+      "Hands-on experience with HTML, CSS, JavaScript, Bootstrap, React/Angular",
+      "Knowledge in global state management for FE applications",
+      "Understanding of mobile and responsive design",
+      "Ability to leverage modern software architecture, design patterns, and solutions to increase the value of a strong platform",
+      "Good understanding of OOP and basic experience with Java/Spring Boot"
+    ],
+    "benefits": [
+      "Competitive remuneration package",
+      "Additional Medical & Life insurance",
+      "4 days additional paid leave (total: 24 days)",
+      "Food vouchers",
+      "Training, continuous learning, and career development in the largest IT company on the market",
+      "Unlimited access to courses from a variety of external partners for the best learner’s experience (e.g., LinkedIn Learning, Udemy)",
+      "Access to a foreign language learning platform",
+      "Stable employment in an international company",
+      "Advancement opportunities within the organization (a variety of interesting projects with an array of technologies and tools)",
+      "Flexibility in work arrangement (hybrid or fully remote work, the home office culture is in our DNA)",
+      "Workplace equipment to organize your home office (e.g., chair, desk, additional monitor, headset etc.)",
+      "DXC Partner courses and certifications (Microsoft, SAP, ServiceNow, AWS, Google, Dell Technologies, IBM, Microfocus, Salesforce, Red Hat, VMware, Workday)",
+      "Employee Referral Program – a financial bonus for the referrer for successful candidate recommendation",
+      "Employee Recognition Program with points assigned by colleagues for the recognized employees (exchangeable for prizes)",
+      "Employee Assistance Program (providing 24/7 support for employees and their families in difficult life situations)",
+      "Opportunity to join our numerous charity and ecology-related events organized by our Employee Ambassadors team"
+    ],
+    "finalWords": [
+      "We Deliver Excellence for our Customers and colleagues every day. Our values form the foundation of everything we do and every decision we make",
+      "If you feel comfortable with the above-mentioned requirements, please send us your CV in English. At DXC our employees’ safety and well-being remain a key priority for us. Therefore, we continue with stay-at-home recruiting and video interviewing for the foreseeable future.",
+      "Please note only shortlisted candidates will be contacted."
+    ]
+  }
+]
