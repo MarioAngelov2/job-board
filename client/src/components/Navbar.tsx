@@ -60,6 +60,11 @@ const Navbar = () => {
             </div>
             {/*MOBILE NAV */}
             <div className="lg:hidden flex gap-4 items-center">
+              <SignedOut>
+                <Button variant="ghost" onClick={() => navigate("/sign-in")} className="p-0">
+                  Sign In
+                </Button>
+              </SignedOut>
               <UserButton afterSignOutUrl="/sign-in" />
               <Sheet>
                 <SheetTrigger>
