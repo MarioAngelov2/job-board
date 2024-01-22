@@ -18,6 +18,7 @@ const Jobs = () => {
             <div className="max-w-[200px] md:p-4">
               <img
                 src={job.logo}
+                alt="company logo"
                 className=" object-contain max-h-[40px] md:max-h-[60px] w-[70px] md:w-[90px]"
               />
             </div>
