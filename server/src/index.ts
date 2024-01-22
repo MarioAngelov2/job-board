@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import router from "./routes/index";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -19,6 +21,6 @@ app.use(router);
 
 const server = http.createServer(app);
 
-server.listen(8080, () => {
-  console.log("Server listening on port 8080");
+server.listen(process.env.PORT, () => {
+  console.log("Server listening on port " + process.env.PORT);
 });
