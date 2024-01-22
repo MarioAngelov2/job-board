@@ -58,10 +58,9 @@ const Navbar = () => {
                 </SignedOut>
               </div>
             </div>
-            {/* TODO MOBILE NAV */}
+            {/*MOBILE NAV */}
             <div className="lg:hidden flex gap-4 items-center">
               <UserButton afterSignOutUrl="/sign-in" />
-              {/* MOBILE */}
               <Sheet>
                 <SheetTrigger>
                   <RxHamburgerMenu
