@@ -141,7 +141,10 @@ const JobDetails = () => {
               <div className="flex flex-col items-start">
                 <h1 className="text-xl md:text-2xl font-bold">Your profile</h1>
                 {job.requirements.map((reqirements) => (
-                  <li className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]">
+                  <li
+                    key={reqirements}
+                    className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]"
+                  >
                     {reqirements}
                   </li>
                 ))}
@@ -150,7 +153,10 @@ const JobDetails = () => {
               <div className="flex flex-col items-start mb-12">
                 <h1 className="text-xl md:text-2xl font-bold">We Offer</h1>
                 {job.benefits.map((benefits) => (
-                  <li className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]">
+                  <li
+                    key={benefits}
+                    className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]"
+                  >
                     {benefits}
                   </li>
                 ))}
