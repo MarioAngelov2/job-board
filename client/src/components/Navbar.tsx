@@ -61,7 +61,11 @@ const Navbar = () => {
             {/*MOBILE NAV */}
             <div className="lg:hidden flex gap-4 items-center">
               <SignedOut>
-                <Button variant="ghost" onClick={() => navigate("/sign-in")} className="p-0">
+                <Button
+                  variant="ghost"
+                  onClick={() => navigate("/sign-in")}
+                  className="p-0 hover:bg-transparent"
+                >
                   Sign In
                 </Button>
               </SignedOut>
