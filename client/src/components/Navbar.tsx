@@ -43,7 +43,7 @@ const Navbar = () => {
                   <Button variant="ghost">
                     <Link to="/dashboard/my-jobs">My Jobs</Link>
                   </Button>
-                  <UserButton afterSignOutUrl="/sign-in" />
+                  <UserButton afterSignOutUrl="/" />
                 </SignedIn>
                 <SignedOut>
                   <Button variant="ghost" onClick={() => navigate("/sign-in")}>
