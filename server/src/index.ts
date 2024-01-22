@@ -3,6 +3,7 @@ import http from "http";
 import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
+import router from "./routes/index";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(
 
 app.use(compression());
 app.use(bodyParser.json());
+app.use(router);
 
 const server = http.createServer(app);
 
