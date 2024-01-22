@@ -4,7 +4,6 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { IoCloseOutline } from "react-icons/io5";
 import {
   Sheet,
   SheetContent,
@@ -62,7 +61,6 @@ const Navbar = () => {
             {/* TODO MOBILE NAV */}
             <div className="lg:hidden flex gap-4 items-center">
               <UserButton afterSignOutUrl="/sign-in" />
-
               {/* MOBILE */}
               <Sheet>
                 <SheetTrigger>
