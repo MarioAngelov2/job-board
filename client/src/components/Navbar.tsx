@@ -54,27 +54,25 @@ const Navbar = () => {
             </div>
             {/* TODO MOBILE NAV */}
             <div className="lg:hidden flex gap-6 items-center">
-              <SignedIn>
-                <UserButton afterSignOutUrl="/sign-in" />
-                {open ? (
-                  <IoCloseOutline
-                    className="text-4xl z-20"
-                    onClick={handleMobileMenu}
-                  />
-                ) : (
-                  <RxHamburgerMenu
-                    className="text-3xl z-10"
-                    onClick={handleMobileMenu}
-                  />
-                )}
-                {open && (
-                  <div className="absolute top-0 right-0 w-screen h-screen bg-gray-50">
-                    <div className="flex justify-start mt-4 ml-2">
-                      MOBILE MENU
-                    </div>
+              <UserButton afterSignOutUrl="/sign-in" />
+              {open ? (
+                <IoCloseOutline
+                  className="text-4xl z-20"
+                  onClick={handleMobileMenu}
+                />
+              ) : (
+                <RxHamburgerMenu
+                  className="text-3xl z-10"
+                  onClick={handleMobileMenu}
+                />
+              )}
+              {open && (
+                <div className="absolute top-0 right-0 w-screen h-screen bg-gray-50">
+                  <div className="flex justify-start mt-4 ml-2">
+                    MOBILE MENU
                   </div>
-                )}
-              </SignedIn>
+                </div>
+              )}
             </div>
           </div>
         </MaxWidthWrapper>
