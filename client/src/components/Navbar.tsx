@@ -27,7 +27,7 @@ const Navbar = () => {
             <div className="flex lg:ml-0">
               <Link to="/" className="font-black text-3xl">
                 dev.
-                <span className="text-blue-600 hover:text-gray-900 transition duration-300 ease-in-out">
+                <span className="text-blue-600 lg:hover:text-gray-900 transition duration-300 ease-in-out">
                   jobs
                 </span>
               </Link>
