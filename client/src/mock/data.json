@@ -10,7 +10,7 @@
     "salaryType": "midRange",
     "seniorityLevel": "Mid-level",
     "seniorityType": "mid",
-    "datePosted": "2024-01-21",
+    "datePosted": "2024-01-22",
     "positionDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nisl non libero lacinia feugiat."
   },
   {
@@ -66,7 +66,7 @@
     "salaryType": "highRange",
     "seniorityLevel": "Senior-level",
     "seniorityType": "senior",
-    "datePosted": "2024-01-17",
+    "datePosted": "2023-12-17",
     "positionDetails": "Pellentesque vitae purus nec mauris tincidunt aliquet. Ut nec nisl luctus, dictum neque nec, cursus risus."
   }
 ]
