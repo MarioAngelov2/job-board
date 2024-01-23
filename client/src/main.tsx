@@ -13,9 +13,11 @@ import SignUpPage from "./pages/SignUp.tsx";
 import MyJobs from "./pages/MyJobs.tsx";
 import Home from "./pages/Home.tsx";
 import JobDetails from "./pages/JobDetails.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 const router = createBrowserRouter([
   {
+    errorElement: <NotFound />,
     element: <RootLayout />,
     children: [
       { path: "/", element: <Home /> },
