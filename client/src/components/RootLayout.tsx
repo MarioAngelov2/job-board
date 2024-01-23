@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -13,6 +14,7 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <Navbar />
+      <ScrollToTop />
       <Outlet />
       <Footer />
     </ClerkProvider>
