@@ -5,11 +5,11 @@ import { setFilter } from "../redux/filters/filterSlice";
 import { RootState } from "@/redux/store";
 
 const experience = [
+  { id: "any", name: "Any", value: "any" },
   { id: "intern", name: "Intern", value: "intern" },
-  { id: "junior", name: "Junior", value: "junior" },
-  { id: "lowExp", name: "1-2 years experience", value: "lowExp" },
-  { id: "midExp", name: "2-5 years experience", value: "midExp" },
-  { id: "highExp", name: "+5 years experience", value: "highExp" },
+  { id: "junior", name: "1-2 years experience", value: "junior" },
+  { id: "mid", name: "2-5 years experience", value: "mid" },
+  { id: "senior", name: "+5 years experience", value: "senior" },
   { id: "teamLead", name: "Team Lead", value: "teamLead" },
 ];
 
