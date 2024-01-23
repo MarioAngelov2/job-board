@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn, CiClock2, CiCalendarDate } from "react-icons/ci";
 import { PiMoneyLight } from "react-icons/pi";
