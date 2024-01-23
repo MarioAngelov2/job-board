@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "logo": "/public/logo1.png",
+    "logo": "/logo1.png",
     "company": "DXC Technology",
     "jobTitle": "Senior React Developer",
     "location": "Sofia",
@@ -12,7 +12,7 @@
   },
   {
     "id": "2",
-    "logo": "/public/logo2.png",
+    "logo": "/logo2.png",
     "company": "TechCorp Inc.",
     "jobTitle": "Frontend Engineer",
     "location": "Sofia",
@@ -23,7 +23,7 @@
   },
   {
     "id": "3",
-    "logo": "/public/logo3.png",
+    "logo": "/logo3.png",
     "company": "Innovate Solutions",
     "jobTitle": "UX/UI Designer",
     "location": "Plovdiv",
@@ -34,7 +34,7 @@
   },
   {
     "id": "4",
-    "logo": "/public/logo4.png",
+    "logo": "/logo4.png",
     "company": "GlobalTech Ltd.",
     "jobTitle": "Data Scientist",
     "location": "Remote",
@@ -45,7 +45,7 @@
   },
   {
     "id": "5",
-    "logo": "/public/logo5.png",
+    "logo": "/logo5.png",
     "company": "CodeMasters Co.",
     "jobTitle": "Software Engineer",
     "location": "Remote",
