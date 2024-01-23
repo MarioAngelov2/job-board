@@ -6,9 +6,9 @@ import { RootState } from "@/redux/store";
 
 const datePosted = [
   { id: "allTime", name: "All time", value: "allTime" },
-  { id: "last24hours", name: "Last 24 hours", value: "last24hours" },
-  { id: "last7days", name: "Last 7 days", value: "last7days" },
-  { id: "lastMonth", name: "Last Mont", value: "lastMonth" },
+  { id: "last24h", name: "Last 24 hours", value: "last24h" },
+  { id: "last7d", name: "Last 7 days", value: "last7d" },
+  { id: "last30d", name: "Last Month", value: "last30d" },
 ];
 
 const DatePostingList = () => {
