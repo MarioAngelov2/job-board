@@ -31,7 +31,9 @@ const Footer = () => {
                 jobs
               </span>
             </Link>
-            <p className="mt-4">Find a job in one of the best tech companies in Bulgaria</p>
+            <p className="mt-4 text-sm md:text-base">
+              Find a job in one of the best tech companies in Bulgaria
+            </p>
           </div>
           <ul className="flex flex-col justify-self-start lg:justify-self-center">
             <h1 className="font-semibold uppercase mb-2">Apply</h1>
@@ -39,7 +41,7 @@ const Footer = () => {
               <li key={link.title}>
                 <Link
                   to={link.link}
-                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out"
+                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out text-sm md:text-base"
                 >
                   {link.title}
                 </Link>
@@ -52,7 +54,7 @@ const Footer = () => {
               <li key={link.title}>
                 <Link
                   to={link.link}
-                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out"
+                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out text-sm md:text-base"
                 >
                   {link.title}
                 </Link>
@@ -65,7 +67,7 @@ const Footer = () => {
               <li key={link.title}>
                 <Link
                   to={link.link}
-                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out"
+                  className="text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out text-sm md:text-base"
                 >
                   {link.title}
                 </Link>
