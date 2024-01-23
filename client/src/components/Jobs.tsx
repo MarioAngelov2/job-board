@@ -3,7 +3,10 @@ import { CiLocationOn, CiClock2, CiCalendarDate } from "react-icons/ci";
 import { PiMoneyLight } from "react-icons/pi";
 import data from "../mock/data.json";
 import { resetFilters } from "../redux/filters/filterSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+
+console.log(data);
 
 type Job = {
   id: string;
@@ -13,7 +16,10 @@ type Job = {
   logo: string;
   employmentType: string;
   salaryRange: string;
+  salaryType: string;
   datePosted: string;
+  seniorityLevel: string;
+  seniorityType: string;
 };
 
 interface JobsProps {
@@ -27,8 +33,20 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { search, location } = searchValues;
+  const selectedLocation = useSelector(
+    (state: RootState) => state.filterReducer.location
+  );
+  const selectedSalary = useSelector(
+    (state: RootState) => state.filterReducer.salary
+  );
+  const selectedSeniority = useSelector(
+    (state: RootState) => state.filterReducer.seniority
+  );
+  const selectedDatePosted = useSelector(
+    (state: RootState) => state.filterReducer.datePosted
+  );
 
-  const filteredJobs = data.filter((job: Job) => {
+  let filteredJobs = data.filter((job: Job) => {
     const searchMatch =
       job.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
       job.company.toLowerCase().includes(search.toLowerCase());
@@ -39,6 +57,31 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
     return searchMatch && locationMatch;
   });
+
+  if (selectedLocation && selectedLocation !== "any") {
+    filteredJobs = filteredJobs.filter((job: Job) => {
+      return job.location
+        .toLowerCase()
+        .includes(selectedLocation.toLowerCase());
+    });
+  }
+
+  if (selectedSalary && selectedSalary !== "any") {
+    filteredJobs = filteredJobs.filter((job: Job) => {
+      return job.salaryType
+        .toLowerCase()
+        .includes(selectedSalary.toLowerCase());
+    });
+  }
+
+  if (selectedSeniority && selectedSeniority !== "any") {
+    console.log(selectedSeniority);
+    filteredJobs = filteredJobs.filter((job: Job) => {
+      return job.seniorityType
+        .toLowerCase()
+        .includes(selectedSeniority.toLowerCase());
+    });
+  }
 
   return (
     <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-4 py-4 gap-4">
