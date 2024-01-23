@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn, CiClock2, CiCalendarDate } from "react-icons/ci";
 import { PiMoneyLight } from "react-icons/pi";
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { parseISO, differenceInDays } from "date-fns";
 import JobsSkeleton from "./JobsSkeleton";
+import PaginationComponent from "./Pagination";
 
 type Job = {
   id: string;
@@ -29,10 +31,14 @@ interface JobsProps {
   };
 }
 
+const ITEMS_PER_PAGE = 7;
+
 const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { search, location } = searchValues;
+
   const selectedLocation = useSelector(
     (state: RootState) => state.filterReducer.location
   );
@@ -99,14 +105,20 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
       }
     });
   }
+  const totalPages = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
 
-  if (filteredJobs.length === 0) {
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const jobsToShow = filteredJobs.slice(startIndex, endIndex);
+
+  if (jobsToShow.length === 0) {
     return <JobsSkeleton />;
   }
 
   return (
     <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-4 py-4 gap-4">
-      {filteredJobs.map((job) => (
+      {jobsToShow.map((job) => (
         <div
           key={job.id}
           onClick={() => {
@@ -152,6 +164,11 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
           </div>
         </div>
       ))}
+      <PaginationComponent
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(newPage) => setCurrentPage(newPage)}
+      />
     </div>
   );
 };
