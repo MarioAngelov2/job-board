@@ -1,5 +1,8 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RootState } from "@/redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter } from "../redux/filters/filterSlice";
 
 const locations = [
   { id: "any", name: "Any", value: "any" },
@@ -11,6 +14,15 @@ const locations = [
 ];
 
 const LocationMenu = () => {
+  const dispatch = useDispatch();
+  const selectedLocation = useSelector(
+    (state: RootState) => state.locationReducer.location
+  );
+
+  const handleLocationChange = (value: string) => {
+    dispatch(setFilter({ filterName: "location", value }));
+  };
+
   return (
     <>
       <RadioGroup className="flex flex-col gap-2">
@@ -20,7 +32,12 @@ const LocationMenu = () => {
             transition duration-300 ease-in-out"
             key={location.id}
           >
-            <RadioGroupItem value={location.value} id={location.id} />
+            <RadioGroupItem
+              value={location.value}
+              id={location.id}
+              checked={selectedLocation === location.value}
+              onClick={() => handleLocationChange(location.value)}
+            />
             <Label htmlFor={location.value} className="cursor-pointer">
               {location.name}
             </Label>
