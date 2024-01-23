@@ -6,6 +6,7 @@ import { resetFilters } from "../redux/filters/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { parseISO, differenceInDays } from "date-fns";
+import JobsSkeleton from "./JobsSkeleton";
 
 type Job = {
   id: string;
@@ -99,6 +100,10 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
     });
   }
 
+  if (filteredJobs.length === 0) {
+    return <JobsSkeleton />;
+  }
+
   return (
     <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-4 py-4 gap-4">
       {filteredJobs.map((job) => (
@@ -116,7 +121,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
               <img
                 src={job.logo}
                 alt="company logo"
-                className=" object-contain max-h-[40px] md:max-h-[60px] w-[70px] md:w-[90px]"
+                className="object-contain max-h-[40px] md:max-h-[60px] w-[70px] md:w-[90px]"
               />
             </div>
           </div>
