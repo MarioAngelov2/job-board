@@ -5,8 +5,7 @@ import data from "../mock/data.json";
 import { resetFilters } from "../redux/filters/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-
-console.log(data);
+import { parseISO, differenceInDays } from "date-fns";
 
 type Job = {
   id: string;
@@ -80,6 +79,23 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
       return job.seniorityType
         .toLowerCase()
         .includes(selectedSeniority.toLowerCase());
+    });
+  }
+
+  if (selectedDatePosted && selectedDatePosted !== "allTime") {
+    filteredJobs = filteredJobs.filter((job: Job) => {
+      let postedDate = parseISO(job.datePosted);
+      let differenceInDaysResult = differenceInDays(new Date(), postedDate);
+
+      if (selectedDatePosted === "last24h") {
+        return differenceInDaysResult <= 1;
+      } else if (selectedDatePosted === "last7d") {
+        return differenceInDaysResult <= 7;
+      } else if (selectedDatePosted === "last30d") {
+        return differenceInDaysResult >= 30;
+      } else {
+        return job;
+      }
     });
   }
 
