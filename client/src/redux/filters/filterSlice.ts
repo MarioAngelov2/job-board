@@ -15,20 +15,10 @@ const filtersSlice = createSlice({
       const { filterName, value } = action.payload;
       return { ...state, [filterName]: value };
     },
-    resetFilters: (state) => initialState,
+    resetFilters: () => initialState,
   },
 });
 
 export const { setFilter, resetFilters } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
-
-// const locationSlice = createSlice({
-//   name: "location",
-//   initialState,
-//   reducers: {
-//     setLocation: (state, action) => {
-//       return { ...state, location: action.payload };
-//     },
-//   },
-// });
