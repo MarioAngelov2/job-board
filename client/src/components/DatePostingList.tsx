@@ -14,7 +14,7 @@ const datePosted = [
 const DatePostingList = () => {
   const dispatch = useDispatch();
   const selectedDate = useSelector(
-    (state: RootState) => state.locationReducer.datePosted
+    (state: RootState) => state.filterReducer.datePosted
   );
 
   const handleDateChange = (value: string) => {

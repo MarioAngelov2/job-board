@@ -16,7 +16,7 @@ const experience = [
 const SeniorityList = () => {
   const dispatch = useDispatch();
   const selectedSeiority = useSelector(
-    (state: RootState) => state.locationReducer.seniority
+    (state: RootState) => state.filterReducer.seniority
   );
 
   const handleSeniorityChange = (value: string) => {

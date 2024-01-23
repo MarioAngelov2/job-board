@@ -16,7 +16,7 @@ const locations = [
 const LocationMenu = () => {
   const dispatch = useDispatch();
   const selectedLocation = useSelector(
-    (state: RootState) => state.locationReducer.location
+    (state: RootState) => state.filterReducer.location
   );
 
   const handleLocationChange = (value: string) => {

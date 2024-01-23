@@ -14,7 +14,7 @@ const salary = [
 const PriceList = () => {
   const dispatch = useDispatch();
   const selectedLocation = useSelector(
-    (state: RootState) => state.locationReducer.salary
+    (state: RootState) => state.filterReducer.salary
   );
 
   const handleSalaryChange = (value: string) => {
