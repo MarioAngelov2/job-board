@@ -4,6 +4,7 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { FcDocument, FcFolder } from "react-icons/fc";
 import {
   Sheet,
   SheetContent,
@@ -77,9 +78,22 @@ const Navbar = () => {
                     className="text-3xl"
                   />
                 </SheetTrigger>
-                <SheetContent>
+                <SheetContent className="px-0 py-10">
                   <SheetHeader>
-                    <SheetDescription>dasda</SheetDescription>
+                    <SheetDescription className="flex flex-col gap-2">
+                      <Button variant="ghost" className="text-lg w-full justify-start">
+                        <Link to="/dashboard/my-jobs" className="flex items-center gap-2">
+                          <FcDocument className="text-2xl"/>
+                          Jobs Applied
+                        </Link>
+                      </Button>
+                      <Button variant="ghost" className="text-lg w-full justify-start">
+                        <Link to="/dashboard/my-jobs" className="flex items-center gap-2">
+                          <FcFolder className="text-2xl"/>
+                          Saved Jobs
+                        </Link>
+                      </Button>
+                    </SheetDescription>
                   </SheetHeader>
                 </SheetContent>
               </Sheet>
