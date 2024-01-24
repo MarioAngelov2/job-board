@@ -9,8 +9,8 @@ const NoDataFound = () => {
           alt="no data found"
           className="w-[350px] md:w-[550px] h-auto"
         />
-        <p className="text-xl md:text-3xl mb-1">No data found</p>
-        <p className="text-lg md:text-3xl mb-12">Refresh the page or try again later</p>
+        <p className="text-xl md:text-2xl mb-1 text-gray-500">No data found</p>
+        <p className="text-lg md:text-2xl mb-12 text-gray-500">Refresh the page or try again later</p>
       </div>
     </MaxWidthWrapper>
   );
