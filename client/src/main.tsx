@@ -5,8 +5,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 
-import RootLayout from "./components/RootLayout";
-import DashboardLayout from "./components/DashboardLayout";
+import RootLayout from "./Layouts/RootLayout.tsx";
+import DashboardLayout from "./Layouts/DashboardLayout.tsx";
 
 import SignInPage from "./pages/SignIn.tsx";
 import SignUpPage from "./pages/SignUp.tsx";
