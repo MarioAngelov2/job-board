@@ -7,8 +7,11 @@ import {
   CiLocationOn,
   CiHeart,
 } from "react-icons/ci";
+import { PiMoneyLight } from "react-icons/pi";
+import { BsSuitcaseLg } from "react-icons/bs";
 import { LuSend } from "react-icons/lu";
 import jobData from "../mock/companyData.json";
+import { formatDistance } from "date-fns";
 
 const JobDetails = () => {
   const [showTopNav, setShowTopNav] = useState(false);
@@ -84,9 +87,23 @@ const JobDetails = () => {
                       <p className="text-sm md:text-base">{job.location}</p>
                     </div>
                     <div className="flex items-center gap-1 text-gray-500">
-                      <CiCalendarDate className="text-lg lg:text-2xl" />
+                      <PiMoneyLight className="text-xl lg:text-2xl" />
                       <p className="text-sm md:text-base">
-                        Published: {job.datePosted}
+                        {job.salaryRange} BGN
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 text-gray-500">
+                      <BsSuitcaseLg className="text-md lg:text-xl" />
+                      <p className="text-sm md:text-base">
+                        {job.seniorityLevel}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 text-gray-500">
+                      <CiCalendarDate className="text-xl lg:text-2xl" />
+                      <p className="text-sm md:text-base">
+                        Published:{" "}
+                        {formatDistance(new Date(), new Date(job.datePosted))}{" "}
+                        ago
                       </p>
                     </div>
                   </div>
