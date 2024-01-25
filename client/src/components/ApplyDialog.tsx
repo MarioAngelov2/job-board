@@ -66,7 +66,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
           {children}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px] p-12">
         <DialogHeader>
           <DialogTitle>Send your CV</DialogTitle>
           <DialogDescription>
@@ -121,7 +121,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
                   <FormControl>
                     <Input
                       type="file"
-                      className="w-[260px] sm:min-w-[350px] cursor-pointer text-slate-500"
+                      className="w-full sm:min-w-[350px] cursor-pointer text-slate-500"
                       {...field}
                     />
                   </FormControl>
@@ -129,7 +129,11 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Apply</Button>
+            <div className="flex md:justify-end">
+              <Button className="w-full md:w-[40%] mt-4" type="submit">
+                Apply
+              </Button>
+            </div>
           </form>
         </Form>
       </DialogContent>
