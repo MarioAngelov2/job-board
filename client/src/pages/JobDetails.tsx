@@ -12,6 +12,7 @@ import { BsSuitcaseLg } from "react-icons/bs";
 import { LuSend } from "react-icons/lu";
 import jobData from "../mock/companyData.json";
 import { formatDistance } from "date-fns";
+import ApplyDialog from "@/components/ApplyDialog";
 
 const JobDetails = () => {
   const [showTopNav, setShowTopNav] = useState(false);
@@ -62,10 +63,10 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div className="hidden lg:flex w-full justify-end">
-                  <Button className="flex items-center gap-2 w-[230px] h-[45px] text-lg">
+                  <ApplyDialog className="gap-2 w-[230px] h-[45px] text-lg">
                     <LuSend className="text-2xl" />
                     Apply
-                  </Button>
+                  </ApplyDialog>
                 </div>
               </div>
             </section>
@@ -108,14 +109,14 @@ const JobDetails = () => {
                     </div>
                   </div>
                   <div className="mt-4 flex flex-col md:flex-row gap-4">
-                    <Button className="flex items-center w-full md:w-[300px] lg:hidden gap-2 text-md">
+                    <ApplyDialog className="mb-0 mt-0 lg:hidden">
                       <LuSend className="text-xl" />
-                      Apply{" "}
-                    </Button>
-                    <Button className="flex items-center gap-2 w-full md:w-[300px] text-md">
+                      Apply
+                    </ApplyDialog>
+                    <ApplyDialog className="mb-0 mt-0">
                       <CiHeart className="text-2xl" />
                       Save
-                    </Button>
+                    </ApplyDialog>
                   </div>
                 </div>
               </div>
@@ -126,10 +127,10 @@ const JobDetails = () => {
               {showTopNav && (
                 <div className="bg-white fixed top-12 left-0 h-18 w-full lg:hidden">
                   <div className="flex flex-row gap-4 py-4 px-4 items-center justify-center">
-                    <Button className="flex items-center w-full md:w-[300px] h-9 gap-2">
+                    <ApplyDialog className="flex items-center w-full md:w-[300px] gap-2 mt-0 mb-0">
                       <LuSend className="text-lg" />
-                      Apply{" "}
-                    </Button>
+                      Apply
+                    </ApplyDialog>
                     <Button className="flex items-center gap-2 w-full md:w-[300px] h-9">
                       <CiHeart className="text-xl" />
                       Save
@@ -179,10 +180,10 @@ const JobDetails = () => {
                 ))}
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
-              <Button className="flex items-center w-full md:w-[300px] mb-12 mt-8 gap-2">
+              <ApplyDialog>
                 <LuSend className="text-xl" />
-                Apply{" "}
-              </Button>
+                Apply
+              </ApplyDialog>
             </section>
           </React.Fragment>
         ))}
