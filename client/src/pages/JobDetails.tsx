@@ -113,10 +113,10 @@ const JobDetails = () => {
                       <LuSend className="text-xl" />
                       Apply
                     </ApplyDialog>
-                    <ApplyDialog className="mb-0 mt-0">
-                      <CiHeart className="text-2xl" />
+                    <Button className="flex items-center gap-2 w-full md:w-[300px]">
+                      <CiHeart className="text-xl" />
                       Save
-                    </ApplyDialog>
+                    </Button>
                   </div>
                 </div>
               </div>
