@@ -88,7 +88,7 @@ const Home = () => {
       {/* FILTER MENU */}
       <div className="lg:flex lg:flex-row lg:gap-6">
         <FilterMenu />
-        <Jobs searchValues={form.getValues()}/>
+        <Jobs searchValues={form.getValues()} />
       </div>
     </MaxWidthWrapper>
   );

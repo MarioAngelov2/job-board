@@ -31,7 +31,7 @@ const Footer = () => {
                 jobs
               </span>
             </Link>
-            <p className="mt-4 text-sm md:text-base">
+            <p className="mt-4 text-sm md:text-base text-gray-500">
               Find a job in one of the best tech companies in Bulgaria
             </p>
           </div>
