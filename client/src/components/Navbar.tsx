@@ -18,6 +18,11 @@ const links = [
   { title: "Find a job", href: "#" },
 ];
 
+const privateLinks = [
+  { title: "Jobs Applied", href: "/dashboard/my-jobs" },
+  { title: "Saved Jobs", href: "/dashboard/saved-jobs" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -27,29 +32,26 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky z-50 top-0 inset-0 h-16">
+    <div className="sticky inset-0 top-0 z-50 h-16">
       <header className="relative bg-white">
         <MaxWidthWrapper>
           <div className="flex pt-2 pb-2">
             <div className="flex lg:ml-0">
-              <Link to="/" className="font-black text-3xl">
+              <Link to="/" className="text-3xl font-black">
                 dev.
-                <span className="text-blue-600 lg:hover:text-gray-900 transition duration-300 ease-in-out">
+                <span className="text-blue-600 transition duration-300 ease-in-out lg:hover:text-gray-900">
                   jobs
                 </span>
               </Link>
             </div>
-            <div className="flex ml-auto items-center">
+            <div className="flex items-center ml-auto">
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                {links.map((link) => (
-                  <Button variant="ghost" key={link.title}>
-                    <a href={link.href}>{link.title}</a>
-                  </Button>
-                ))}
                 <SignedIn>
-                  <Button variant="ghost">
-                    <Link to="/dashboard/my-jobs">My Jobs</Link>
-                  </Button>
+                  {privateLinks.map((link) => (
+                    <Button key={link.title} variant="ghost">
+                      <Link to={link.href}>{link.title}</Link>
+                    </Button>
+                  ))}
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>
                 <SignedOut>
@@ -60,7 +62,7 @@ const Navbar = () => {
               </div>
             </div>
             {/*MOBILE NAV */}
-            <div className="lg:hidden flex gap-4 items-center">
+            <div className="flex items-center gap-4 lg:hidden">
               <SignedOut>
                 <Button
                   variant="ghost"
@@ -81,15 +83,27 @@ const Navbar = () => {
                 <SheetContent className="px-0 py-10">
                   <SheetHeader>
                     <SheetDescription className="flex flex-col gap-2">
-                      <Button variant="ghost" className="text-lg w-full justify-start">
-                        <Link to="/dashboard/my-jobs" className="flex items-center gap-2">
-                          <FcDocument className="text-2xl"/>
+                      <Button
+                        variant="ghost"
+                        className="justify-start w-full text-lg"
+                      >
+                        <Link
+                          to="/dashboard/my-jobs"
+                          className="flex items-center gap-2"
+                        >
+                          <FcDocument className="text-2xl" />
                           Jobs Applied
                         </Link>
                       </Button>
-                      <Button variant="ghost" className="text-lg w-full justify-start">
-                        <Link to="/dashboard/my-jobs" className="flex items-center gap-2">
-                          <FcFolder className="text-2xl"/>
+                      <Button
+                        variant="ghost"
+                        className="justify-start w-full text-lg"
+                      >
+                        <Link
+                          to="/dashboard/my-jobs"
+                          className="flex items-center gap-2"
+                        >
+                          <FcFolder className="text-2xl" />
                           Saved Jobs
                         </Link>
                       </Button>

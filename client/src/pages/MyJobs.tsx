@@ -25,14 +25,14 @@ const MyJobs = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="flex flex-col min-h-screen py-4 px-2 md:py-12 md:px-8">
-        <h1 className="font-black uppercase text-xl md:text-2xl text-gray-600 mb-1">
+      <div className="flex flex-col min-h-screen px-2 py-4 md:py-12 md:px-8">
+        <h1 className="mb-1 text-xl font-black text-gray-600 uppercase md:text-2xl">
           My Applications
         </h1>
-        <p className="text-gray-600 mb-4">
+        <p className="mb-4 text-gray-600">
           See all jobs for which you have applied.
         </p>
-        <div className="w-full bg-white p-2 md:p-4">
+        <div className="w-full p-2 bg-white md:p-4">
           <div className="hidden md:grid md:grid-cols-3 md:gap-4">
             <div className="flex flex-col">
               <p className="text-gray-500">Date of application</p>
@@ -46,13 +46,13 @@ const MyJobs = () => {
           </div>
           {jobData.map((job) => (
             <div key={job.dateApplied} className="flex flex-col gap-2 md:flex-row mt-4 py-5 w-full border-b-[1px]">
-              <div className="flex md:justify-start w-full text-gray-500">
+              <div className="flex w-full text-gray-500 md:justify-start">
                 {job.dateApplied}
               </div>
-              <div className="flex md:justify-start w-full cursor-pointer font-semibold">
+              <div className="flex w-full font-semibold cursor-pointer md:justify-start">
                 {trimJobTitle(job.jobTitle, 35)}
               </div>
-              <div className="flex md:justify-end w-full text-gray-500 cursor-pointer">
+              <div className="flex w-full text-gray-500 cursor-pointer md:justify-end">
                 {job.company}
               </div>
             </div>
