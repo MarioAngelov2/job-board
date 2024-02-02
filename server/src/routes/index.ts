@@ -1,11 +1,10 @@
 import express from "express";
-import { healthRouter } from "./health";
-import { addProducts, fetchProducts } from "../controllers/products";
+import { createJob } from "../controllers/createJob";
+import { getJobs } from "../controllers/getJobs";
 
 const router = express.Router();
 
-router.use(healthRouter);
-router.post("/products", addProducts);
-router.get("/getProducts", fetchProducts);
+router.post("/createJob", createJob);
+router.get("/getJobs", getJobs);
 
 export default router;
