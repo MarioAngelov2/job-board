@@ -19,7 +19,6 @@ export const createJob = async (req: Request, res: Response) => {
       benefits,
       finalWords,
     } = req.body;
-    console.log(req.body);
 
     const id = uuidv4();
 
