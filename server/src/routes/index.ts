@@ -5,7 +5,7 @@ import { addJobSchema, jobValidation } from "../middleware/jobValidation";
 
 const router = express.Router();
 
-router.post("/createJob", jobValidation(addJobSchema), createJob);
-router.get("/getJobs", getJobs);
+router.post("/jobs/createJob", jobValidation(addJobSchema), createJob);
+router.get("/jobs/getJobs", getJobs);
 
 export default router;
