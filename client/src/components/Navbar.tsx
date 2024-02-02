@@ -19,6 +19,7 @@ const links = [
 ];
 
 const privateLinks = [
+  { title: "Create Job", href: "/dashboard/create-job" },
   { title: "Jobs Applied", href: "/dashboard/my-jobs" },
   { title: "Saved Jobs", href: "/dashboard/saved-jobs" },
 ];

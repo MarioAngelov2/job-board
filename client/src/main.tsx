@@ -16,6 +16,7 @@ import Home from "./pages/Home.tsx";
 import JobDetails from "./pages/JobDetails.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import SavedJobs from "./pages/SavedJobs.tsx";
+import CreateJob from "./pages/CreateJob.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/dashboard/my-jobs", element: <MyJobs /> },
           { path: "/dashboard/saved-jobs", element: <SavedJobs /> },
+          { path: "/dashboard/create-job", element: <CreateJob /> },
         ],
       },
     ],
