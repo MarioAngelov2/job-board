@@ -3,6 +3,8 @@ import { addJob } from "../services/createJob";
 import { v4 as uuidv4 } from "uuid";
 
 export const createJob = async (req: Request, res: Response) => {
+  console.log(req.body);
+
   try {
     const {
       company,
