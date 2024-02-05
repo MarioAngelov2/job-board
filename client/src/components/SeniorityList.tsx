@@ -29,8 +29,7 @@ const SeniorityList = () => {
         {experience.map((exp) => (
           <div
             key={exp.id}
-            className="flex items-center space-x-2 text-slate-600 h-8 px-2 hover:bg-slate-100 rounded-md
-            transition duration-300 ease-in-out"
+            className="flex items-center h-8 px-2 space-x-2 transition duration-300 ease-in-out rounded-md text-slate-600 hover:bg-slate-100"
           >
             <RadioGroupItem
               value={exp.value}

@@ -4,7 +4,7 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FcDocument, FcFolder } from "react-icons/fc";
+import { FcDocument, FcFolder, FcBookmark, FcPlus } from "react-icons/fc";
 import {
   Sheet,
   SheetContent,
@@ -104,8 +104,20 @@ const Navbar = () => {
                           to="/dashboard/my-jobs"
                           className="flex items-center gap-2"
                         >
-                          <FcFolder className="text-2xl" />
+                          <FcBookmark className="text-2xl" />
                           Saved Jobs
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="justify-start w-full text-lg"
+                      >
+                        <Link
+                          to="/dashboard/create-job"
+                          className="flex items-center gap-2"
+                        >
+                          <FcPlus className="text-2xl" />
+                          Create Job
                         </Link>
                       </Button>
                     </SheetDescription>
