@@ -86,7 +86,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      className="text-slate-500 col-span-3 transition duration-300 ease-in-out"
+                      className="col-span-3 transition duration-300 ease-in-out text-slate-500"
                       placeholder="Your name"
                       {...field}
                     />
@@ -103,7 +103,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      className="text-slate-500 col-span-3 transition duration-300 ease-in-out"
+                      className="col-span-3 transition duration-300 ease-in-out text-slate-500"
                       placeholder="example@gmail.com"
                       {...field}
                     />
