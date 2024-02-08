@@ -13,11 +13,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-const links = [
-  { title: "Post a job", href: "#" },
-  { title: "Find a job", href: "#" },
-];
-
 const privateLinks = [
   { title: "Create Job", href: "/dashboard/create-job" },
   { title: "Jobs Applied", href: "/dashboard/my-jobs" },
