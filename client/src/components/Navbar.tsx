@@ -4,7 +4,7 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FcDocument, FcFolder, FcBookmark, FcPlus } from "react-icons/fc";
+import { FcDocument, FcBookmark, FcPlus } from "react-icons/fc";
 import {
   Sheet,
   SheetContent,
