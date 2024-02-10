@@ -39,6 +39,7 @@ export const addJob = async (data: Job) => {
           seniority_level, 
           seniority_type, 
           tasks, 
+          about_us,
           requirements, 
           benefits, 
           final_words) VALUES (
@@ -52,6 +53,7 @@ export const addJob = async (data: Job) => {
             ${seniorityLevel}, 
             ${seniorityType}, 
             ${tasks}, 
+            ${aboutUs},
             ${requirements}, 
             ${benefits}, 
             ${finalWords}
