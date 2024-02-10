@@ -3,7 +3,7 @@ import { SQL } from "sql-template-strings";
 import { Job } from "../types";
 
 export const addJob = async (data: Job) => {
-  const {
+  let {
     id,
     company,
     jobTitle,
@@ -20,6 +20,26 @@ export const addJob = async (data: Job) => {
     finalWords,
     companyLogo,
   } = data;
+
+  if (Number(salaryRange) >= 1000 && Number(salaryRange) <= 2000) {
+    salaryType = "lowRange";
+  } else if (Number(salaryRange) > 2000 && Number(salaryRange) <= 3500) {
+    salaryType = "midRange";
+  } else if (Number(salaryRange) > 3500) {
+    salaryType = "highRange";
+  }
+
+  if (seniorityLevel === "intern") {
+    seniorityType = "intern";
+  } else if (seniorityLevel === "junior") {
+    seniorityType = "junior";
+  } else if (seniorityLevel === "mid") {
+    seniorityType = "mid";
+  } else if (seniorityLevel === "senior") {
+    seniorityType = "senior";
+  } else if (seniorityLevel === "teamLead") {
+    seniorityType = "teamLead";
+  }
 
   try {
     const connection = await pool.connect();
