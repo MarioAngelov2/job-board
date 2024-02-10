@@ -18,44 +18,59 @@ export const addJob = async (data: Job) => {
     requirements,
     benefits,
     finalWords,
+    companyLogo,
   } = data;
 
   try {
-    const jobs = await pool.query(
-      SQL`INSERT INTO jobs (
-        id,
-        company, 
-        job_title, 
-        location, 
-        employment_type, 
-        salary_range, 
-        salary_type, 
-        seniority_level, 
-        seniority_type, 
-        tasks, 
-        requirements, 
-        benefits, 
-        final_words) VALUES (
-          ${id},
-          ${company}, 
-          ${jobTitle}, 
-          ${location}, 
-          ${employmentType}, 
-          ${salaryRange}, 
-          ${salaryType}, 
-          ${seniorityLevel}, 
-          ${seniorityType}, 
-          ${tasks}, 
-          ${requirements}, 
-          ${benefits}, 
-          ${finalWords}
-          )`
-    );
+    const connection = await pool.connect();
 
-    console.log(jobs);
-    return jobs.rows;
+    try {
+      await connection.query("begin");
+
+      await connection.query(
+        SQL`INSERT INTO jobs (
+          id,
+          company, 
+          job_title, 
+          location, 
+          employment_type, 
+          salary_range, 
+          salary_type, 
+          seniority_level, 
+          seniority_type, 
+          tasks, 
+          requirements, 
+          benefits, 
+          final_words) VALUES (
+            ${id},
+            ${company}, 
+            ${jobTitle}, 
+            ${location}, 
+            ${employmentType}, 
+            ${salaryRange}, 
+            ${salaryType}, 
+            ${seniorityLevel}, 
+            ${seniorityType}, 
+            ${tasks}, 
+            ${requirements}, 
+            ${benefits}, 
+            ${finalWords}
+            )`
+      );
+
+      const { imageId, imageUrl } = companyLogo;
+
+      await connection.query(
+        SQL`INSERT INTO images (job_id, image_id, url) VALUES (${id}, ${imageId}, ${imageUrl})`
+      );
+
+      await connection.query("commit");
+    } catch (error) {
+      await connection.query("rollback");
+      throw new Error("Database update error.");
+    }
   } catch (error) {
     console.log(error);
-    throw new Error("Database update error.")
+    throw new Error("Database update error.");
   }
 };
