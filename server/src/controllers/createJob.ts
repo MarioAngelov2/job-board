@@ -3,7 +3,6 @@ import { addJob } from "../services/createJob";
 import { v4 as uuidv4 } from "uuid";
 
 export const createJob = async (req: Request, res: Response) => {
-  console.log(req.body);
 
   try {
     const {
@@ -20,11 +19,12 @@ export const createJob = async (req: Request, res: Response) => {
       requirements,
       benefits,
       finalWords,
+      companyLogo,
     } = req.body;
 
     const id = uuidv4();
 
-    const jobs = await addJob({
+    await addJob({
       id,
       company,
       jobTitle,
@@ -39,9 +39,10 @@ export const createJob = async (req: Request, res: Response) => {
       requirements,
       benefits,
       finalWords,
+      companyLogo,
     });
 
-    return res.json(jobs);
+    return res.json("Job listing successfully created");
   } catch (error) {
     console.log(error);
     return res.status(500);
