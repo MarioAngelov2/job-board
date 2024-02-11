@@ -7,9 +7,13 @@ import multer from "multer";
 
 const router = express.Router();
 
-router.post("/jobs/createJob", createJob);
+router.post("/jobs/createJob", jobValidation(addJobSchema), createJob);
 router.get("/jobs/getJobs", getJobs);
-router.post("/images/upload-image", multer().single("image"), uploadCompanyLogo)
+router.post(
+  "/images/upload-image",
+  multer().single("image"),
+  uploadCompanyLogo
+);
 
 export default router;
 

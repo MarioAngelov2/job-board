@@ -11,9 +11,10 @@ export const addJobSchema = Joi.object({
   seniorityLevel: Joi.string().required(),
   seniorityType: Joi.string(),
   tasks: Joi.string().required(),
-  finalWords: Joi.string(),
   requirements: Joi.array().items(Joi.string()).required(),
-  benefits: Joi.array().items(Joi.string())
+  benefits: Joi.array().items(Joi.string()),
+  companyLogo: Joi.object(),
+  aboutUs: Joi.string()
 });
 
 export const jobValidation =

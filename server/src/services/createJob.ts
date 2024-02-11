@@ -21,7 +21,7 @@ export const addJob = async (data: Job) => {
     companyLogo,
   } = data;
 
-  if (Number(salaryRange) >= 1000 && Number(salaryRange) <= 2000) {
+  if (Number(salaryRange) >= 0 && Number(salaryRange) <= 2000) {
     salaryType = "lowRange";
   } else if (Number(salaryRange) > 2000 && Number(salaryRange) <= 3500) {
     salaryType = "midRange";

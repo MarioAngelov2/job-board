@@ -37,10 +37,9 @@ const formSchema = z.object({
   salaryRange: z.string(),
   seniorityLevel: z.string(),
   tasks: z.string(),
-  finalWords: z.string(),
   aboutUs: z.string(),
-  newBenefits: z.string(),
-  newRequirement: z.string(),
+  benefits: z.string(),
+  requirements: z.string(),
   companyLogo: z.object({ file: z.any() }),
 });
 const CreateJobForm = () => {
@@ -56,10 +55,9 @@ const CreateJobForm = () => {
       salaryRange: "",
       seniorityLevel: "",
       tasks: "",
-      finalWords: "",
       aboutUs: "",
-      newBenefits: "",
-      newRequirement: "",
+      benefits: "",
+      requirements: "",
       companyLogo: undefined,
     },
   });
@@ -91,14 +89,14 @@ const CreateJobForm = () => {
   };
 
   const handleAddRequirement = () => {
-    if (form.getValues("newRequirement") === "") return;
+    if (form.getValues("requirements") === "") return;
 
-    const newRequirement = form.getValues("newRequirement");
+    const newRequirement = form.getValues("requirements");
     setRequirementsList((prevRequirements) => [
       ...prevRequirements,
       newRequirement,
     ]);
-    form.setValue("newRequirement", "");
+    form.setValue("requirements", "");
   };
 
   const handleDeleteRequirement = (index: number) => {
@@ -108,11 +106,11 @@ const CreateJobForm = () => {
   };
 
   const handleAddBenefits = () => {
-    if (form.getValues("newBenefits") === "") return;
+    if (form.getValues("benefits") === "") return;
 
-    const benefits = form.getValues("newBenefits");
+    const benefits = form.getValues("benefits");
     setBenefitsList((prevBenefits) => [...prevBenefits, benefits]);
-    form.setValue("newBenefits", "");
+    form.setValue("benefits", "");
   };
 
   const handleDeleteBenefits = (index: number) => {
@@ -341,7 +339,7 @@ const CreateJobForm = () => {
           <div className="flex-1">
             <FormField
               control={form.control}
-              name="newRequirement"
+              name="requirements"
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Requirements</FormLabel>
@@ -396,7 +394,7 @@ const CreateJobForm = () => {
           <div className="flex-1">
             <FormField
               control={form.control}
-              name="newBenefits"
+              name="benefits"
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Benefits</FormLabel>
