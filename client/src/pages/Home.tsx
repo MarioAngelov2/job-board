@@ -34,18 +34,19 @@ const Home = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="mt-12 md:mt-24 relative">
-        <h1 className="text-3xl text-center font-semibold md:text-4xl lg:text-start lg:text-5xl">
+      <div className="relative mt-12 md:mt-24">
+        <h1 className="text-3xl font-semibold text-center md:text-4xl lg:text-start lg:text-5xl">
           Find your <span className="text-blue-600">new job</span> today
         </h1>
-        <p className="mt-3 text-slate-500 text-sm text-center lg:text-start md:text-base">
+        <p className="mt-3 text-sm text-center text-slate-500 lg:text-start md:text-base">
           Thousands of jobs in the computer, engineering and technology sectors
           are waiting for you.
         </p>
         <Form {...form}>
           <form
+            data-testid="formTest"
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-8 flex flex-col lg:flex-row items-center gap-3 w-full"
+            className="flex flex-col items-center w-full gap-3 mt-8 lg:flex-row"
           >
             <FormField
               control={form.control}
