@@ -21,24 +21,34 @@ export const addJob = async (data: Job) => {
     companyLogo,
   } = data;
 
-  if (Number(salaryRange) >= 0 && Number(salaryRange) <= 2000) {
+  let salaryNumber: number;
+
+  const salaryRangeMatch = salaryRange.match(/^(\d+)-(\d+)$/);
+
+  if (salaryRangeMatch) {
+    salaryNumber = parseInt(salaryRangeMatch[1], 10);
+  } else {
+    salaryNumber = parseInt(salaryRange, 10);
+  }
+  
+  if (salaryNumber >= 0 && salaryNumber <= 2000) {
     salaryType = "lowRange";
-  } else if (Number(salaryRange) > 2000 && Number(salaryRange) <= 3500) {
+  } else if (Number(salaryNumber) > 2000 && Number(salaryNumber) <= 3500) {
     salaryType = "midRange";
-  } else if (Number(salaryRange) > 3500) {
+  } else if (Number(salaryNumber) > 3500) {
     salaryType = "highRange";
   }
 
   if (seniorityLevel === "intern") {
-    seniorityType = "intern";
+    seniorityType = "Intern";
   } else if (seniorityLevel === "junior") {
-    seniorityType = "junior";
+    seniorityType = "Junior";
   } else if (seniorityLevel === "mid") {
-    seniorityType = "mid";
+    seniorityType = "Mid";
   } else if (seniorityLevel === "senior") {
-    seniorityType = "senior";
+    seniorityType = "Senior";
   } else if (seniorityLevel === "teamLead") {
-    seniorityType = "teamLead";
+    seniorityType = "Team Lead";
   }
 
   try {
