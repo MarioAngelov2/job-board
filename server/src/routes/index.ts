@@ -1,6 +1,7 @@
 import express from "express";
 import { createJob } from "../controllers/createJob";
 import { getJobs } from "../controllers/getJobs";
+import { getJobById } from "../controllers/getJob";
 import { uploadCompanyLogo } from "../controllers/images";
 import { addJobSchema, jobValidation } from "../middleware/jobValidation";
 import multer from "multer";
@@ -14,7 +15,6 @@ router.post(
   multer().single("image"),
   uploadCompanyLogo
 );
+router.get("/jobs/getJob/:id", getJobById);
 
 export default router;
-
-// jobValidation(addJobSchema),
