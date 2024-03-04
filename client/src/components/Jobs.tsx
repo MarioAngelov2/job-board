@@ -3,27 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { CiLocationOn, CiClock2, CiCalendarDate } from "react-icons/ci";
 import { BsSuitcaseLg } from "react-icons/bs";
 import { PiMoneyLight } from "react-icons/pi";
-import data from "../mock/data.json";
 import { resetFilters } from "../redux/filters/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import { parseISO, differenceInDays } from "date-fns";
 import JobsSkeleton from "./JobsSkeleton";
 import PaginationComponent from "./Pagination";
 import NoDataFound from "./NoDataFound";
+import { fetchJobs, selectFetchJobs } from "../redux/jobs/jobSlice";
 
 type Job = {
-  id: string;
-  company: string;
   jobTitle: string;
-  location: string;
-  logo: string;
   employmentType: string;
   salaryRange: string;
   salaryType: string;
-  datePosted: string;
   seniorityLevel: string;
   seniorityType: string;
+  aboutUs: string;
+  datePosted: string;
+  finalWords: string;
+  id: string;
+  company: string;
+  location: string;
+  tasks: string;
+  requirements: string[];
+  benefits: string[];
+  logo: string;
 };
 
 interface JobsProps {
@@ -39,7 +44,9 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const jobs = useSelector(selectFetchJobs);
+
   const { search, location } = searchValues;
 
   const selectedLocation = useSelector(
@@ -58,6 +65,8 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   useEffect(() => {
     setLoading(true);
 
+    dispatch(fetchJobs())
+
     const fetchData = () => {
       setTimeout(() => {
         setLoading(false);
@@ -69,9 +78,16 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedDatePosted, selectedLocation, selectedSalary, selectedSeniority, search, location]);
+  }, [
+    selectedDatePosted,
+    selectedLocation,
+    selectedSalary,
+    selectedSeniority,
+    search,
+    location,
+  ]);
 
-  let filteredJobs = data.filter((job: Job) => {
+  let filteredJobs = jobs.filter((job: Job) => {
     const searchMatch =
       job.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
       job.company.toLowerCase().includes(search.toLowerCase());
@@ -100,7 +116,6 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   }
 
   if (selectedSeniority && selectedSeniority !== "any") {
-    console.log(selectedSeniority);
     filteredJobs = filteredJobs.filter((job: Job) => {
       return job.seniorityType
         .toLowerCase()
@@ -109,7 +124,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   }
 
   if (selectedDatePosted && selectedDatePosted !== "allTime") {
-    filteredJobs = filteredJobs.filter((job: Job) => {
+    filteredJobs = filteredJobs.filter((job: any) => {
       let postedDate = parseISO(job.datePosted);
       let differenceInDaysResult = differenceInDays(new Date(), postedDate);
 
@@ -140,8 +155,8 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   }
 
   return (
-    <div className="mt-12 flex flex-col bg-white w-full min-h-screen rounded-sm px-0 md:px-4 py-4 gap-4">
-      {jobsToShow.map((job) => (
+    <div className="flex flex-col w-full min-h-screen gap-4 px-0 py-4 mt-12 bg-white rounded-sm md:px-4">
+      {jobsToShow.map((job: Job) => (
         <div
           key={job.id}
           onClick={() => {
@@ -161,14 +176,14 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-xs md:text-md text-gray-500">{job.company}</p>
+            <p className="text-xs text-gray-500 md:text-md">{job.company}</p>
             <p className="font-semibold text-md md:text-lg">{job.jobTitle}</p>
             <div className="flex flex-row gap-4">
               <div className="flex items-center gap-1 text-gray-500">
                 <CiLocationOn className="text-sm lg:text-xl" />
                 <p className="text-xs md:text-base">{job.location}</p>
               </div>
-              <div className="hidden md:flex items-center gap-1 text-gray-500">
+              <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiClock2 className="text-sm lg:text-lg" />
                 <p className="text-sm md:text-base">{job.employmentType}</p>
               </div>
@@ -176,12 +191,12 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
                 <PiMoneyLight className="text-sm lg:text-xl" />
                 <p className="text-xs md:text-base">{job.salaryRange}</p>
               </div>
-              <div className="hidden md:flex items-center gap-1 text-gray-500">
+              <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiCalendarDate className="text-sm lg:text-xl" />
-                <p className="text-sm md:text-base">{job.datePosted}</p>
+                <p className="text-sm md:text-base">{new Date(job.datePosted).toLocaleDateString()}</p>
               </div>
             </div>
-            <div className="text-xs md:text-base text-gray-500 flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 md:text-base">
               <BsSuitcaseLg />
               {job.seniorityLevel}
             </div>
