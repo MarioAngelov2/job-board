@@ -6,11 +6,11 @@ import { RootState } from "@/redux/store";
 
 const experience = [
   { id: "any", name: "Any", value: "any" },
-  { id: "intern", name: "Intern", value: "intern" },
-  { id: "junior", name: "1-2 years experience", value: "junior" },
-  { id: "mid", name: "2-5 years experience", value: "mid" },
-  { id: "senior", name: "+5 years experience", value: "senior" },
-  { id: "teamLead", name: "Team Lead", value: "teamLead" },
+  { id: "intern", name: "Intern", value: "Intern" },
+  { id: "junior", name: "1-2 years experience", value: "Junior" },
+  { id: "mid", name: "2-5 years experience", value: "Mid" },
+  { id: "senior", name: "+5 years experience", value: "Senior" },
+  { id: "teamLead", name: "Team Lead", value: "Team Lead" },
 ];
 
 const SeniorityList = () => {
