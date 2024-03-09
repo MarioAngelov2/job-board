@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { FetchedJob } from "../../types/index";
 
 type Job = {
   company: string;
@@ -15,25 +16,6 @@ type Job = {
   companyLogo: string | null;
 };
 
-type FetchedJob = {
-  jobTitle: string;
-  employmentType: string;
-  salaryRange: string;
-  salaryType: string;
-  seniorityLevel: string;
-  seniorityType: string;
-  aboutUs: string;
-  datePosted: string;
-  finalWords: string;
-  id: string;
-  company: string;
-  location: string;
-  tasks: string;
-  requirements: string[];
-  benefits: string[];
-  logo: string;
-};
-
 const initialState = {
   addJob: {
     jobs: [] as Job[],
@@ -41,7 +23,7 @@ const initialState = {
     error: null as string | null,
   },
   fetchJobs: {
-    jobs: [] as Job[],
+    jobs: [] as FetchedJob[],
     loading: false,
     error: null as string | null,
   },
@@ -140,9 +122,8 @@ export const selectFetchJobs = (state: {
   jobsReducer: { fetchJobs: { jobs: FetchedJob[] } };
 }) => state.jobsReducer.fetchJobs.jobs;
 
-export const selectFetchById = (
-  state: { jobsReducer: { fetchedJobById: { job: FetchedJob[] } } }
-) => state.jobsReducer.fetchedJobById.job;
-
+export const selectFetchById = (state: {
+  jobsReducer: { fetchedJobById: { job: FetchedJob[] } };
+}) => state.jobsReducer.fetchedJobById.job;
 
 export default jobSlice.reducer;

@@ -11,25 +11,7 @@ import JobsSkeleton from "./JobsSkeleton";
 import PaginationComponent from "./Pagination";
 import NoDataFound from "./NoDataFound";
 import { fetchJobs, selectFetchJobs } from "../redux/jobs/jobSlice";
-
-type Job = {
-  jobTitle: string;
-  employmentType: string;
-  salaryRange: string;
-  salaryType: string;
-  seniorityLevel: string;
-  seniorityType: string;
-  aboutUs: string;
-  datePosted: string;
-  finalWords: string;
-  id: string;
-  company: string;
-  location: string;
-  tasks: string;
-  requirements: string[];
-  benefits: string[];
-  logo: string;
-};
+import { Job } from "../types/index";
 
 interface JobsProps {
   searchValues: {
@@ -65,7 +47,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   useEffect(() => {
     setLoading(true);
 
-    dispatch(fetchJobs())
+    dispatch(fetchJobs());
 
     const fetchData = () => {
       setTimeout(() => {
@@ -193,7 +175,9 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
               </div>
               <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiCalendarDate className="text-sm lg:text-xl" />
-                <p className="text-sm md:text-base">{new Date(job.datePosted).toLocaleDateString()}</p>
+                <p className="text-sm md:text-base">
+                  {new Date(job.datePosted).toLocaleDateString()}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 md:text-base">

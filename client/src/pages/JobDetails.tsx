@@ -16,26 +16,7 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobById, selectFetchById } from "../redux/jobs/jobSlice";
 import { useParams } from "react-router-dom";
-
-type FetchedJob = {
-  jobTitle: string;
-  employmentType: string;
-  salaryRange: string;
-  salaryType: string;
-  seniorityLevel: string;
-  seniorityType: string;
-  aboutUs: string;
-  datePosted: string;
-  finalWords: string;
-  id: string;
-  company: string;
-  location: string;
-  tasks: string;
-  requirements: string[];
-  benefits: string[];
-  logo: string;
-};
-
+import { FetchedJob } from "../types/index";
 
 const JobDetails = () => {
   const [showTopNav, setShowTopNav] = useState(false);
