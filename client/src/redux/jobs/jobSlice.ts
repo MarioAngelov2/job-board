@@ -32,7 +32,7 @@ type FetchedJob = {
   requirements: string[];
   benefits: string[];
   logo: string;
-}
+};
 
 const initialState = {
   addJob: {
@@ -44,7 +44,12 @@ const initialState = {
     jobs: [] as Job[],
     loading: false,
     error: null as string | null,
-  }
+  },
+  fetchedJobById: {
+    job: [] as FetchedJob[],
+    loading: false,
+    error: null as string | null,
+  },
 };
 
 export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
@@ -66,6 +71,19 @@ export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async () => {
     console.log(error);
   }
 });
+
+export const fetchJobById = createAsyncThunk(
+  "job/fetchById",
+  async (id: string) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/jobs/getJob/${id}`);
+
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const jobSlice = createSlice({
   name: "jobs",
@@ -99,9 +117,32 @@ const jobSlice = createSlice({
         state.fetchJobs.loading = false;
         state.fetchJobs.error = action.error.message || "Failed to fetch jobs.";
       })
+
+      // Fetch Job By Id
+      .addCase(fetchJobById.pending, (state) => {
+        state.fetchedJobById.loading = true;
+        state.fetchedJobById.error = null;
+      })
+
+      .addCase(fetchJobById.fulfilled, (state, action) => {
+        state.fetchedJobById.loading = false;
+        state.fetchedJobById.job = action.payload;
+      })
+      .addCase(fetchJobById.rejected, (state, action) => {
+        state.fetchedJobById.loading = false;
+        state.fetchedJobById.error =
+          action.error.message || "Failed to fetch job by id.";
+      });
   },
 });
 
-export const selectFetchJobs = (state: { jobsReducer: { fetchJobs: { jobs: FetchedJob[] } } }) =>
-  state.jobsReducer.fetchJobs.jobs;
+export const selectFetchJobs = (state: {
+  jobsReducer: { fetchJobs: { jobs: FetchedJob[] } };
+}) => state.jobsReducer.fetchJobs.jobs;
+
+export const selectFetchById = (
+  state: { jobsReducer: { fetchedJobById: { job: FetchedJob[] } } }
+) => state.jobsReducer.fetchedJobById.job;
+
+
 export default jobSlice.reducer;
