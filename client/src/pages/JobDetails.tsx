@@ -10,12 +10,38 @@ import {
 import { PiMoneyLight } from "react-icons/pi";
 import { BsSuitcaseLg } from "react-icons/bs";
 import { LuSend } from "react-icons/lu";
-import jobData from "../mock/companyData.json";
 import { formatDistance } from "date-fns";
 import ApplyDialog from "@/components/ApplyDialog";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJobById, selectFetchById } from "../redux/jobs/jobSlice";
+import { useParams } from "react-router-dom";
+
+type FetchedJob = {
+  jobTitle: string;
+  employmentType: string;
+  salaryRange: string;
+  salaryType: string;
+  seniorityLevel: string;
+  seniorityType: string;
+  aboutUs: string;
+  datePosted: string;
+  finalWords: string;
+  id: string;
+  company: string;
+  location: string;
+  tasks: string;
+  requirements: string[];
+  benefits: string[];
+  logo: string;
+};
+
 
 const JobDetails = () => {
   const [showTopNav, setShowTopNav] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const id = useParams().id;
+  const job = useSelector(selectFetchById);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +54,22 @@ const JobDetails = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchJobById(id));
+    } else {
+      return;
+    }
+  }, [dispatch, id]);
+
+  if (!job) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="min-h-screen px-2">
-        {jobData.map((job) => (
+        {job.map((job: FetchedJob) => (
           <React.Fragment key={job.id}>
             <section>
               <div
@@ -48,21 +86,21 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-xs md:text-md text-gray-500">
+                  <p className="text-xs text-gray-500 md:text-md">
                     {job.company}
                   </p>
                   <p className="font-semibold text-md md:text-2xl md:w-[350px]">
                     {job.jobTitle}
                   </p>
                   <div className="flex flex-row gap-4">
-                    <div className="hidden md:flex items-center gap-1 text-gray-500">
+                    <div className="items-center hidden gap-1 text-gray-500 md:flex">
                       <p className="text-sm md:text-base">
                         {job.employmentType}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="hidden lg:flex w-full justify-end">
+                <div className="justify-end hidden w-full lg:flex">
                   <ApplyDialog className="gap-2 w-[230px] h-[45px] text-lg">
                     <LuSend className="text-2xl" />
                     Apply
@@ -72,11 +110,11 @@ const JobDetails = () => {
             </section>
             {/* SECOND SECTION */}
             <section>
-              <div className="bg-white mt-6 px-6 py-4 rounded-md">
+              <div className="px-6 py-4 mt-6 bg-white rounded-md">
                 <div className="flex flex-col gap-1">
                   <p className="text-sm text-slate-500">{job.company}</p>
                   <p className="text-xl font-semibold">{job.jobTitle}</p>
-                  <div className="flex flex-wrap md:flex-row items-center gap-4 mt-1">
+                  <div className="flex flex-wrap items-center gap-4 mt-1 md:flex-row">
                     <div className="flex items-center gap-1 text-gray-500">
                       <CiClock2 className="text-lg lg:text-lg" />
                       <p className="text-sm md:text-base">
@@ -108,8 +146,8 @@ const JobDetails = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-4 flex flex-col md:flex-row gap-4">
-                    <ApplyDialog className="mb-0 mt-0 lg:hidden">
+                  <div className="flex flex-col gap-4 mt-4 md:flex-row">
+                    <ApplyDialog className="mt-0 mb-0 lg:hidden">
                       <LuSend className="text-xl" />
                       Apply
                     </ApplyDialog>
@@ -125,8 +163,8 @@ const JobDetails = () => {
             <section className="relative">
               {/* MOBILE ADDITIONAL NAV */}
               {showTopNav && (
-                <div className="bg-white fixed top-12 left-0 h-18 w-full lg:hidden">
-                  <div className="flex flex-row gap-4 py-4 px-4 items-center justify-center">
+                <div className="fixed left-0 w-full bg-white top-12 h-18 lg:hidden">
+                  <div className="flex flex-row items-center justify-center gap-4 px-4 py-4">
                     <ApplyDialog className="flex items-center w-full md:w-[300px] gap-2 mt-0 mb-0">
                       <LuSend className="text-lg" />
                       Apply
@@ -138,9 +176,9 @@ const JobDetails = () => {
                   </div>
                 </div>
               )}
-              <div className="mt-12 flex flex-col">
+              <div className="flex flex-col mt-12">
                 <div className="flex flex-col items-start">
-                  <h1 className="text-xl md:text-2xl font-bold">Our Culture</h1>
+                  <h1 className="text-xl font-bold md:text-2xl">Our Culture</h1>
                   <p className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]">
                     {job.aboutUs}
                   </p>
@@ -148,7 +186,7 @@ const JobDetails = () => {
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
               <div className="flex flex-col items-start">
-                <h1 className="text-xl md:text-2xl font-bold">
+                <h1 className="text-xl font-bold md:text-2xl">
                   Daily Challenges
                 </h1>
                 <p className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]">
@@ -157,8 +195,8 @@ const JobDetails = () => {
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
               <div className="flex flex-col items-start">
-                <h1 className="text-xl md:text-2xl font-bold">Your profile</h1>
-                {job.requirements.map((reqirements) => (
+                <h1 className="text-xl font-bold md:text-2xl">Your profile</h1>
+                {job.requirements.map((reqirements: string) => (
                   <li
                     key={reqirements}
                     className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]"
@@ -169,8 +207,8 @@ const JobDetails = () => {
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
               <div className="flex flex-col items-start mb-12">
-                <h1 className="text-xl md:text-2xl font-bold">We Offer</h1>
-                {job.benefits.map((benefits) => (
+                <h1 className="text-xl font-bold md:text-2xl">We Offer</h1>
+                {job.benefits.map((benefits: string) => (
                   <li
                     key={benefits}
                     className="mt-2 text-slate-500 tracking-wide leading-7 text-sm md:text-base max-w-full md:max-w-[900px]"
