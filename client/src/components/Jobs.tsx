@@ -47,15 +47,9 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   useEffect(() => {
     setLoading(true);
 
-    dispatch(fetchJobs());
-
-    const fetchData = () => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    };
-
-    fetchData();
+    dispatch(fetchJobs()).then(() => {
+      setLoading(false);
+    })
   }, [selectedDatePosted, selectedLocation, selectedSalary, selectedSeniority]);
 
   useEffect(() => {
