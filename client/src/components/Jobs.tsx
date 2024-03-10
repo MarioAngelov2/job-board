@@ -176,7 +176,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
             </div>
             <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 md:text-base">
               <BsSuitcaseLg />
-              {job.seniorityLevel}
+              {job.seniorityType}
             </div>
           </div>
         </div>

@@ -82,7 +82,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="flex flex-col md:flex-row md:items-center md:gap-4">
+                <FormItem className="flex flex-col mt-3 md:flex-col md:items-start">
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
@@ -99,7 +99,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem className="flex flex-col md:flex-row md:items-center md:gap-4">
+                <FormItem className="flex flex-col mt-3 md:flex-col md:items-start">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
@@ -116,7 +116,7 @@ const ApplyDialog = ({ className, children }: ApplyDialogProps) => {
               control={form.control}
               name="uploadFile"
               render={({ field }) => (
-                <FormItem className="flex flex-col md:flex-row md:items-center md:gap-4">
+                <FormItem className="flex flex-col mt-3 md:flex-col md:items-start">
                   <FormLabel>Attach CV</FormLabel>
                   <FormControl>
                     <Input
