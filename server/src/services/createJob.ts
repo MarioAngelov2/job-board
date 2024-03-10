@@ -17,8 +17,8 @@ export const addJob = async (data: Job) => {
     tasks,
     requirements,
     benefits,
-    finalWords,
     companyLogo,
+    userId,
   } = data;
 
   let salaryNumber: number;
@@ -72,7 +72,7 @@ export const addJob = async (data: Job) => {
           about_us,
           requirements, 
           benefits, 
-          final_words) VALUES (
+          user_id) VALUES (
             ${id},
             ${company}, 
             ${jobTitle}, 
@@ -86,7 +86,7 @@ export const addJob = async (data: Job) => {
             ${aboutUs},
             ${requirements}, 
             ${benefits}, 
-            ${finalWords}
+            ${userId}
             )`
       );
 

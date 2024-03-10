@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addJob } from "../redux/jobs/jobSlice";
 import { uploadImage, selectImage } from "../redux/jobs/imageSlice";
 import { AppDispatch } from "@/redux/store";
+import { useAuth } from "@clerk/clerk-react";
 
 const formSchema = z.object({
   company: z.string(),
@@ -62,7 +63,9 @@ const CreateJobForm = () => {
     },
   });
   const dispatch = useDispatch<AppDispatch>();
-  const image = useSelector(selectImage)
+  const image = useSelector(selectImage);
+  const { userId } = useAuth();
+  console.log(userId);
 
   const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -79,6 +82,7 @@ const CreateJobForm = () => {
       requirements: requirementsList,
       benefits: benefitsList,
       companyLogo: image,
+      userId
     };
     console.log(formData);
 
@@ -133,13 +137,15 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Company Logo</FormLabel>
-                  <p className="text-xs text-gray-400">Upload the company's logo</p>
+                  <p className="text-xs text-gray-400">
+                    Upload the company's logo
+                  </p>
                   <FormControl>
                     <Input
                       type="file"
                       className="transition duration-300 ease-in-out cursor-pointer text-slate-500"
                       {...form.register("companyLogo", {
-                        onChange: (e) => handleUploadImage(e)
+                        onChange: (e) => handleUploadImage(e),
                       })}
                     />
                   </FormControl>
@@ -158,7 +164,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Company Name</FormLabel>
-                  <p className="text-xs text-gray-400">Example: DXC Technology</p>
+                  <p className="text-xs text-gray-400">
+                    Example: DXC Technology
+                  </p>
                   <FormControl>
                     <Input
                       className="transition duration-300 ease-in-out text-slate-500"
@@ -177,7 +185,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Job Title</FormLabel>
-                  <p className="text-xs text-gray-400">Example: Senior React Developer</p>
+                  <p className="text-xs text-gray-400">
+                    Example: Senior React Developer
+                  </p>
                   <FormControl>
                     <Input
                       className="transition duration-300 ease-in-out text-slate-500"
@@ -199,7 +209,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Location</FormLabel>
-                  <p className="text-xs text-gray-400">Example: Sofia, Bulgaria</p>
+                  <p className="text-xs text-gray-400">
+                    Example: Sofia, Bulgaria
+                  </p>
                   <FormControl>
                     <Input
                       className="transition duration-300 ease-in-out text-slate-500"
@@ -240,7 +252,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Seniority</FormLabel>
-                  <p className="text-xs text-gray-400">Select from dropdown menu</p>
+                  <p className="text-xs text-gray-400">
+                    Select from dropdown menu
+                  </p>
                   <FormControl>
                     <Select
                       onValueChange={(value) =>
@@ -299,7 +313,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>About The Company</FormLabel>
-                  <p className="text-xs text-gray-400">Information about the company</p>
+                  <p className="text-xs text-gray-400">
+                    Information about the company
+                  </p>
                   <FormControl>
                     <Textarea
                       className="h-32 transition duration-300 ease-in-out text-slate-500"
@@ -321,7 +337,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Specific Tasks</FormLabel>
-                  <p className="text-xs text-gray-400">Specific tasks regarding the position</p>
+                  <p className="text-xs text-gray-400">
+                    Specific tasks regarding the position
+                  </p>
                   <FormControl>
                     <Textarea
                       className="transition duration-300 ease-in-out text-slate-500"
@@ -343,7 +361,10 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Requirements</FormLabel>
-                  <p className="text-xs text-gray-400">Specific requirements regarding the candidat. You can add multiple requirements</p>
+                  <p className="text-xs text-gray-400">
+                    Specific requirements regarding the candidat. You can add
+                    multiple requirements
+                  </p>
                   <FormControl>
                     <Input
                       className="transition duration-300 ease-in-out text-slate-500"
@@ -398,7 +419,9 @@ const CreateJobForm = () => {
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Benefits</FormLabel>
-                  <p className="text-xs text-gray-400">Benefits the company provides. You can add multiple benefits</p>
+                  <p className="text-xs text-gray-400">
+                    Benefits the company provides. You can add multiple benefits
+                  </p>
                   <FormControl>
                     <Input
                       className="transition duration-300 ease-in-out text-slate-500"

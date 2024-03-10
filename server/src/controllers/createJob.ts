@@ -20,6 +20,7 @@ export const createJob = async (req: Request, res: Response) => {
       benefits,
       finalWords,
       companyLogo,
+      userId,
     } = req.body;
 
     const id = uuidv4();
@@ -40,6 +41,7 @@ export const createJob = async (req: Request, res: Response) => {
       benefits,
       finalWords,
       companyLogo,
+      userId,
     });
 
     return res.json("Job listing successfully created");

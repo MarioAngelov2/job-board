@@ -14,7 +14,8 @@ export const addJobSchema = Joi.object({
   requirements: Joi.array().items(Joi.string()).required(),
   benefits: Joi.array().items(Joi.string()),
   companyLogo: Joi.object(),
-  aboutUs: Joi.string()
+  aboutUs: Joi.string(),
+  userId: Joi.string(),
 });
 
 export const jobValidation =

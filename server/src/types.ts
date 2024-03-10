@@ -14,4 +14,5 @@ export type Job = {
   benefits: string[];
   finalWords: string;
   companyLogo: { imageUrl: string; imageId: string };
+  userId: string;
 };
