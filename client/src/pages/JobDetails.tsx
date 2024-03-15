@@ -14,15 +14,22 @@ import { formatDistance } from "date-fns";
 import ApplyDialog from "@/components/ApplyDialog";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJobById, selectFetchById } from "../redux/jobs/jobSlice";
+import {
+  fetchJobById,
+  selectFetchById,
+  saveJob,
+  fetchSavedJobs,
+} from "../redux/jobs/jobSlice";
 import { useParams } from "react-router-dom";
 import { FetchedJob } from "../types/index";
+import { useAuth } from "@clerk/clerk-react";
 
 const JobDetails = () => {
   const [showTopNav, setShowTopNav] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const id = useParams().id;
   const job = useSelector(selectFetchById);
+  const { userId } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +53,12 @@ const JobDetails = () => {
   if (!job) {
     return <div>Loading...</div>;
   }
+
+  useEffect(() => {
+    if (!userId) return;
+
+    dispatch(fetchSavedJobs(userId));
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>
@@ -132,7 +145,12 @@ const JobDetails = () => {
                       <LuSend className="text-xl" />
                       Apply
                     </ApplyDialog>
-                    <Button className="flex items-center gap-2 w-full md:w-[300px]">
+                    <Button
+                      onClick={() =>
+                        dispatch(saveJob({ userId: job.userId, jobId: job.id }))
+                      }
+                      className="flex items-center gap-2 w-full md:w-[300px]"
+                    >
                       <CiHeart className="text-xl" />
                       Save
                     </Button>
@@ -150,7 +168,12 @@ const JobDetails = () => {
                       <LuSend className="text-lg" />
                       Apply
                     </ApplyDialog>
-                    <Button className="flex items-center gap-2 w-full md:w-[300px] h-9">
+                    <Button
+                      onClick={() =>
+                        dispatch(saveJob({ userId: job.userId, jobId: job.id }))
+                      }
+                      className="flex items-center gap-2 w-full md:w-[300px] h-9"
+                    >
                       <CiHeart className="text-xl" />
                       Save
                     </Button>
