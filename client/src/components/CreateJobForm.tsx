@@ -134,7 +134,7 @@ const CreateJobForm = () => {
             <FormField
               control={form.control}
               name="companyLogo"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>Company Logo</FormLabel>
                   <p className="text-xs text-gray-400">
