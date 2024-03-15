@@ -65,7 +65,6 @@ const CreateJobForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const image = useSelector(selectImage);
   const { userId } = useAuth();
-  console.log(userId);
 
   const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
