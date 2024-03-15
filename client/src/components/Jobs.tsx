@@ -65,8 +65,8 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
   let filteredJobs = jobs.filter((job: Job) => {
     const searchMatch =
-      job.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
-      job.company.toLowerCase().includes(search.toLowerCase());
+      job.jobTitle?.toLowerCase().includes(search.toLowerCase()) ||
+      job.company?.toLowerCase().includes(search.toLowerCase());
 
     const locationMatch = job.location
       .toLowerCase()

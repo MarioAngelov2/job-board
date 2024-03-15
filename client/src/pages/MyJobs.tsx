@@ -45,7 +45,10 @@ const MyJobs = () => {
             </div>
           </div>
           {jobData.map((job) => (
-            <div key={job.dateApplied} className="flex flex-col gap-2 md:flex-row mt-4 py-5 w-full border-b-[1px]">
+            <div
+              key={job.dateApplied}
+              className="flex flex-col gap-2 md:flex-row mt-4 py-5 w-full border-b-[1px]"
+            >
               <div className="flex w-full text-gray-500 md:justify-start">
                 {job.dateApplied}
               </div>
