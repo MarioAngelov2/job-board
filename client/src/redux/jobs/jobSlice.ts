@@ -34,6 +34,7 @@ const initialState = {
   },
   saveJobState: {
     loading: false,
+    job: [],
     error: null as string | null,
   },
   savedJobsState: {
@@ -160,8 +161,9 @@ const jobSlice = createSlice({
         state.saveJobState.loading = true;
         state.saveJobState.error = null;
       })
-      .addCase(saveJob.fulfilled, (state) => {
+      .addCase(saveJob.fulfilled, (state, action) => {
         state.saveJobState.loading = false;
+        state.saveJobState.job = action.payload;
       })
       .addCase(saveJob.rejected, (state, action) => {
         state.saveJobState.loading = false;
