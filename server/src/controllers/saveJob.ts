@@ -5,9 +5,9 @@ export const saveJobController = async (req: Request, res: Response) => {
   try {
     const data = req.body;
 
-    await saveJob(data);
+    const result = await saveJob(data);
 
-    return res.status(200).send("Job saved.");
+    return res.status(200).send(result);
   } catch (error) {
     console.log(error);
     return res.status(500);
