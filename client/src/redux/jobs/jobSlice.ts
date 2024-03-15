@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { FetchedJob } from "../../types/index";
+import { FetchedJob, SavedJob } from "../../types/index";
 
 type Job = {
   company: string;
@@ -32,6 +32,15 @@ const initialState = {
     loading: false,
     error: null as string | null,
   },
+  saveJobState: {
+    loading: false,
+    error: null as string | null,
+  },
+  savedJobsState: {
+    jobs: [] as SavedJob[],
+    loading: false,
+    error: null as string | null,
+  },
 };
 
 export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
@@ -59,6 +68,37 @@ export const fetchJobById = createAsyncThunk(
   async (id: string) => {
     try {
       const res = await axios.get(`http://localhost:8080/jobs/getJob/${id}`);
+
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const saveJob = createAsyncThunk(
+  "job/saveJob",
+  async ({ userId, jobId }: { userId: string; jobId: string }) => {
+    try {
+      const res = await axios.post("http://localhost:8080/jobs/saveJob", {
+        userId,
+        jobId,
+      });
+
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const fetchSavedJobs = createAsyncThunk(
+  "job/fetchSavedJobs",
+  async (userId: string) => {
+    try {
+      const res = await axios.post("http://localhost:8080/jobs/savedJobsList", {
+        userId,
+      });
 
       return res.data;
     } catch (error) {
@@ -105,7 +145,6 @@ const jobSlice = createSlice({
         state.fetchedJobById.loading = true;
         state.fetchedJobById.error = null;
       })
-
       .addCase(fetchJobById.fulfilled, (state, action) => {
         state.fetchedJobById.loading = false;
         state.fetchedJobById.job = action.payload;
@@ -114,6 +153,35 @@ const jobSlice = createSlice({
         state.fetchedJobById.loading = false;
         state.fetchedJobById.error =
           action.error.message || "Failed to fetch job by id.";
+      })
+
+      // Save Job
+      .addCase(saveJob.pending, (state) => {
+        state.saveJobState.loading = true;
+        state.saveJobState.error = null;
+      })
+      .addCase(saveJob.fulfilled, (state, action) => {
+        state.saveJobState.loading = false;
+      })
+      .addCase(saveJob.rejected, (state, action) => {
+        state.saveJobState.loading = false;
+        state.saveJobState.error =
+          action.error.message || "Failed to save job.";
+      })
+
+      // Fetch Saved Jobs
+      .addCase(fetchSavedJobs.pending, (state) => {
+        state.savedJobsState.loading = true;
+        state.savedJobsState.error = null;
+      })
+      .addCase(fetchSavedJobs.fulfilled, (state, action) => {
+        state.savedJobsState.loading = false;
+        state.savedJobsState.jobs = action.payload;
+      })
+      .addCase(fetchSavedJobs.rejected, (state, action) => {
+        state.savedJobsState.loading = false;
+        state.savedJobsState.error =
+          action.error.message || "Failed to fetch saved jobs.";
       });
   },
 });
@@ -125,5 +193,10 @@ export const selectFetchJobs = (state: {
 export const selectFetchById = (state: {
   jobsReducer: { fetchedJobById: { job: FetchedJob[] } };
 }) => state.jobsReducer.fetchedJobById.job;
+
+export const selectSavedJobs = (state: {
+  jobsReducer: { savedJobsState: { jobs: FetchedJob[] } };
+}) => state.jobsReducer.savedJobsState?.jobs;
+
 
 export default jobSlice.reducer;
