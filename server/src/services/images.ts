@@ -8,7 +8,11 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadProfilePicture = async (imageData: any) => {
+interface ImageData {
+  buffer: Buffer;
+}
+
+export const uploadProfilePicture = async (imageData: ImageData) => {
   try {
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.v2.uploader.upload_stream(
