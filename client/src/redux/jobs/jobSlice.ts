@@ -160,7 +160,7 @@ const jobSlice = createSlice({
         state.saveJobState.loading = true;
         state.saveJobState.error = null;
       })
-      .addCase(saveJob.fulfilled, (state, action) => {
+      .addCase(saveJob.fulfilled, (state) => {
         state.saveJobState.loading = false;
       })
       .addCase(saveJob.rejected, (state, action) => {
