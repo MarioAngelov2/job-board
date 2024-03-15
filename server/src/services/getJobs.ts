@@ -12,7 +12,6 @@ const transformedRows = (rows: any) => {
       seniority_type,
       about_us,
       date_posted,
-      final_words,
       ...row
     }: {
       job_title: string,
@@ -23,7 +22,6 @@ const transformedRows = (rows: any) => {
         seniority_type: string,
         about_us: string,
         date_posted: string,
-        final_words: string,
     }) => ({
       jobTitle: job_title,
       employmentType: employment_type,
@@ -33,7 +31,6 @@ const transformedRows = (rows: any) => {
       seniorityType: seniority_type,
       aboutUs: about_us,
       datePosted: date_posted,
-      finalWords: final_words,
       ...row,
     })
   );

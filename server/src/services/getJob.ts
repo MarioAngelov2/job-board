@@ -12,7 +12,7 @@ const transformedRows = (rows: any) => {
       seniority_type,
       about_us,
       date_posted,
-      final_words,
+      user_id,
       ...row
     }: {
       job_title: string,
@@ -23,7 +23,8 @@ const transformedRows = (rows: any) => {
         seniority_type: string,
         about_us: string,
         date_posted: string,
-        final_words: string,
+        user_id: string,
+  
     }) => ({
       jobTitle: job_title,
       employmentType: employment_type,
@@ -33,7 +34,7 @@ const transformedRows = (rows: any) => {
       seniorityType: seniority_type,
       aboutUs: about_us,
       datePosted: date_posted,
-      finalWords: final_words,
+      userId: user_id,
       ...row,
     })
   );
@@ -54,9 +55,9 @@ export const fetchJobById = async (id: string) => {
       about_us, 
       date_posted, 
       tasks, 
-      final_words, 
       requirements, 
       benefits, 
+      user_id,
       images.url as logo 
       FROM jobs 
       LEFT JOIN images ON jobs.id = images.job_id 
