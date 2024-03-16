@@ -108,6 +108,22 @@ export const fetchSavedJobs = createAsyncThunk(
   }
 );
 
+export const deleteSavedJob = createAsyncThunk(
+  "job/deleteSavedJob",
+  async (jobId: string) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/jobs/deleteSavedJob",
+        { jobId }
+      );
+
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const jobSlice = createSlice({
   name: "jobs",
   initialState,
@@ -127,7 +143,7 @@ const jobSlice = createSlice({
         state.addJob.error = action.error.message || "Failed to add job.";
       })
 
-      // Fetch Jobs
+      // FETCH JOBS
       .addCase(fetchJobs.pending, (state) => {
         state.fetchJobs.loading = true;
         state.fetchJobs.error = null;
@@ -141,7 +157,7 @@ const jobSlice = createSlice({
         state.fetchJobs.error = action.error.message || "Failed to fetch jobs.";
       })
 
-      // Fetch Job By Id
+      // FETCH JOB BY ID
       .addCase(fetchJobById.pending, (state) => {
         state.fetchedJobById.loading = true;
         state.fetchedJobById.error = null;
@@ -156,7 +172,7 @@ const jobSlice = createSlice({
           action.error.message || "Failed to fetch job by id.";
       })
 
-      // Save Job
+      // SAVE JOB
       .addCase(saveJob.pending, (state) => {
         state.saveJobState.loading = true;
         state.saveJobState.error = null;
@@ -171,7 +187,7 @@ const jobSlice = createSlice({
           action.error.message || "Failed to save job.";
       })
 
-      // Fetch Saved Jobs
+      // FETCH SAVED JOBS
       .addCase(fetchSavedJobs.pending, (state) => {
         state.savedJobsState.loading = true;
         state.savedJobsState.error = null;
@@ -184,6 +200,23 @@ const jobSlice = createSlice({
         state.savedJobsState.loading = false;
         state.savedJobsState.error =
           action.error.message || "Failed to fetch saved jobs.";
+      })
+
+      // DELETE SAVED JOB
+      .addCase(deleteSavedJob.pending, (state) => {
+        state.savedJobsState.loading = true;
+        state.savedJobsState.error = null;
+      })
+      .addCase(deleteSavedJob.fulfilled, (state, action) => {
+        state.savedJobsState.loading = false;
+        state.savedJobsState.jobs = state.savedJobsState.jobs.filter(
+          (job) => job.jobId !== action.payload
+        );
+      })
+      .addCase(deleteSavedJob.rejected, (state, action) => {
+        state.savedJobsState.loading = false;
+        state.savedJobsState.error =
+          action.error.message || "Failed to delete saved job.";
       });
   },
 });
