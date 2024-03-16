@@ -6,6 +6,7 @@ import { fetchSavedJobs, selectSavedJobs } from "../redux/jobs/jobSlice";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { SavedJob } from "../types/index";
 
 const SavedJobs = () => {
   const trimJobTitle = (title: string, maxLength: number) => {
@@ -22,8 +23,6 @@ const SavedJobs = () => {
 
     dispatch(fetchSavedJobs(userId));
   }, [dispatch, userId]);
-
-  console.log(job);
 
   return (
     <MaxWidthWrapper>
@@ -46,27 +45,34 @@ const SavedJobs = () => {
               <p className="text-gray-500">Company</p>
             </div>
           </div>
-          {job.map((job) => (
-            <div
-              key={job.jobId}
-              className="flex flex-col gap-2 md:gap-8 md:flex-row mt-4 py-5 w-full border-b-[1px]"
-            >
-              <div className="flex w-full text-gray-500 md:justify-start">
-                {new Date(job.datePosted).toLocaleDateString()}
+          {job.length === 0 ? (
+            <p>No saved jobs found.</p>
+          ) : (
+            job.map((job) => (
+              <div
+                key={job.jobId}
+                className="flex flex-col gap-2 md:gap-8 md:flex-row mt-4 py-5 w-full border-b-[1px]"
+              >
+                <div className="flex w-full text-gray-500 md:justify-start">
+                  {new Date(job.datePosted).toLocaleDateString()}
+                </div>
+                <div
+                  onClick={() => navigate(`/job/${job.jobId}`)}
+                  className="flex w-full font-semibold cursor-pointer md:justify-start"
+                >
+                  {job.jobTitle}
+                </div>
+                <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
+                  {job.company}
+                </div>
+                <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
+                  <Button className="h-8 mt-3 md:mt-0" variant="destructive">
+                    Delete
+                  </Button>
+                </div>
               </div>
-              <div onClick={() => navigate(`/job/${job.jobId}`)} className="flex w-full font-semibold cursor-pointer md:justify-start">
-                {trimJobTitle(job.jobTitle, 35)}
-              </div>
-              <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
-                {job.company}
-              </div>
-              <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
-                <Button className="h-8 mt-3 md:mt-0" variant="destructive">
-                  Delete
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </MaxWidthWrapper>
