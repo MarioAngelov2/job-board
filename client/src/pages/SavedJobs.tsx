@@ -2,11 +2,16 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { fetchSavedJobs, selectSavedJobs } from "../redux/jobs/jobSlice";
+import {
+  fetchSavedJobs,
+  selectSavedJobs,
+  deleteSavedJob,
+} from "../redux/jobs/jobSlice";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { trimJobTitle } from "../utils/trimText";
+import EmptySavedJobs from "@/components/EmptySavedJobs";
 
 const SavedJobs = () => {
   const navigate = useNavigate();
@@ -19,6 +24,22 @@ const SavedJobs = () => {
 
     dispatch(fetchSavedJobs(userId));
   }, [dispatch, userId]);
+
+  const handleDeleteJob = (jobId: string) => {
+    if (!userId) return;
+
+    dispatch(deleteSavedJob(jobId))
+      .then(() => {
+        dispatch(fetchSavedJobs(userId));
+      })
+      .catch((error) => {
+        console.error("Error deleting job: ", error);
+      });
+  };
+
+  if (job.length === 0) {
+    return <EmptySavedJobs />;
+  }
 
   return (
     <MaxWidthWrapper>
@@ -59,7 +80,11 @@ const SavedJobs = () => {
                 {job.company}
               </div>
               <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
-                <Button className="h-8 mt-3 md:mt-0" variant="destructive">
+                <Button
+                  onClick={() => handleDeleteJob(job.jobId)}
+                  className="h-8 mt-3 md:mt-0"
+                  variant="destructive"
+                >
                   Delete
                 </Button>
               </div>
