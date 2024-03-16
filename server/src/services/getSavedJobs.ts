@@ -16,16 +16,16 @@ const transformedRows = (rows: any) => {
       date_saved,
       ...row
     }: {
-        job_id: string,
-        job_title: string,
-        employment_type: string,
-        salary_range: string,
-        salary_type: string,
-        seniority_level: string,
-        seniority_type: string,
-        about_us: string,
-        date_posted: string,
-        date_saved: string,
+      job_id: string;
+      job_title: string;
+      employment_type: string;
+      salary_range: string;
+      salary_type: string;
+      seniority_level: string;
+      seniority_type: string;
+      about_us: string;
+      date_posted: string;
+      date_saved: string;
     }) => ({
       jobId: job_id,
       jobTitle: job_title,
@@ -44,6 +44,14 @@ const transformedRows = (rows: any) => {
 
 export const getSavedJobs = async (userId: string) => {
   try {
+    const savedJobsCount = await pool.query(
+      SQL`SELECT COUNT(*) as count FROM saved_jobs WHERE user_id = ${userId}`
+    );
+
+    if (savedJobsCount.rows[0].count === "0") {
+      return [];
+    }
+
     const res = await pool.query(
       SQL`SELECT jobs.id as job_id, 
       company, 
@@ -61,7 +69,7 @@ export const getSavedJobs = async (userId: string) => {
       benefits,
       saved_jobs.date_saved
       FROM jobs 
-      LEFT JOIN saved_jobs ON jobs.id = saved_jobs.job_id
+      INNER JOIN saved_jobs ON jobs.id = saved_jobs.job_id
       WHERE jobs.user_id = ${userId}`
     );
 
