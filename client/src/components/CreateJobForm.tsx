@@ -83,7 +83,6 @@ const CreateJobForm = () => {
       companyLogo: image,
       userId
     };
-    console.log(formData);
 
     dispatch(addJob(formData));
     setRequirementsList([]);
