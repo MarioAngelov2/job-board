@@ -6,6 +6,7 @@ import { uploadCompanyLogo } from "../controllers/images";
 import { saveJobController } from "../controllers/saveJob";
 import { savedJobsController } from "../controllers/getSavedJobs";
 import { addJobSchema, jobValidation } from "../middleware/jobValidation";
+import { deleteSavedJobController } from "../controllers/deleteSavedJob";
 import multer from "multer";
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.post(
 router.get("/jobs/getJob/:id", getJobById);
 router.post("/jobs/saveJob", saveJobController);
 router.post("/jobs/savedJobsList", savedJobsController);
+router.post("/jobs/deleteSavedJob", deleteSavedJobController);
 
 export default router;
