@@ -17,20 +17,25 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchJobById,
   selectFetchById,
-  saveJob,
+  selectSavedJobs,
   fetchSavedJobs,
+  saveJob,
 } from "../redux/jobs/jobSlice";
 import { useParams } from "react-router-dom";
 import { FetchedJob } from "../types/index";
 import { useAuth } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
 
 const JobDetails = () => {
+  const [isSaved, setIsSaved] = useState(false);
   const [showTopNav, setShowTopNav] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const id = useParams().id;
   const job = useSelector(selectFetchById);
+  const savedJobs = useSelector(selectSavedJobs);
   const { userId } = useAuth();
 
+  // SHOWS MOBILE NAV ON SCROLL
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -42,23 +47,32 @@ const JobDetails = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // FETCHES JOB BY ID
   useEffect(() => {
-    if (id) {
+    if (id && userId) {
       dispatch(fetchJobById(id));
+      dispatch(fetchSavedJobs(userId));
     } else {
       return;
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, userId]);
 
-  if (!job) {
-    return <div>Loading...</div>;
-  }
-
-  useEffect(() => {
+  // SAVES USER'S JOB TO DATABASE
+  const handleSaveJob = (userId: string | undefined | null, jobId: string) => {
     if (!userId) return;
 
-    dispatch(fetchSavedJobs(userId));
-  }, [dispatch]);
+    const isJobSaved = savedJobs.some((job) => job.jobId === jobId);
+
+    if (isJobSaved || isSaved) {
+      toast.error("You have already saved this job");
+      return;
+    }
+
+    dispatch(saveJob({ userId, jobId }));
+    setIsSaved(true);
+
+    toast.success("Job saved successfully");
+  };
 
   return (
     <MaxWidthWrapper>
@@ -146,9 +160,7 @@ const JobDetails = () => {
                       Apply
                     </ApplyDialog>
                     <Button
-                      onClick={() =>
-                        dispatch(saveJob({ userId: job.userId, jobId: job.id }))
-                      }
+                      onClick={() => handleSaveJob(userId, job.id)}
                       className="flex items-center gap-2 w-full md:w-[300px]"
                     >
                       <CiHeart className="text-xl" />
@@ -169,9 +181,7 @@ const JobDetails = () => {
                       Apply
                     </ApplyDialog>
                     <Button
-                      onClick={() =>
-                        dispatch(saveJob({ userId: job.userId, jobId: job.id }))
-                      }
+                      onClick={() => handleSaveJob(userId, job.id)}
                       className="flex items-center gap-2 w-full md:w-[300px] h-9"
                     >
                       <CiHeart className="text-xl" />
