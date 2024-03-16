@@ -34,7 +34,7 @@ const initialState = {
   },
   saveJobState: {
     loading: false,
-    job: [],
+    job: [] as SavedJob[],
     error: null as string | null,
   },
   savedJobsState: {
@@ -197,8 +197,7 @@ export const selectFetchById = (state: {
 }) => state.jobsReducer.fetchedJobById.job;
 
 export const selectSavedJobs = (state: {
-  jobsReducer: { savedJobsState: { jobs: FetchedJob[] } };
+  jobsReducer: { savedJobsState: { jobs: SavedJob[] } };
 }) => state.jobsReducer.savedJobsState?.jobs;
-
 
 export default jobSlice.reducer;

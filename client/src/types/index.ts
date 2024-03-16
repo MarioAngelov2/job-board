@@ -39,22 +39,19 @@ export type FetchedJob = {
 };
 
 export type SavedJob = {
-  jobTitle: string;
-  employmentType: string;
-  salaryRange: string;
-  salaryType: string;
-  seniorityLevel: string;
-  seniorityType: string;
-  aboutUs: string;
-  datePosted: string;
-  finalWords: string;
-  company: string;
-  location: string;
-  tasks: string;
-  requirements: string[];
-  benefits: string[];
-  logo: string;
-  userId: string;
-  jobId: string;
-  dateSaved: string;
+jobId: string;
+jobTitle: string;
+employmentType: string;
+salaryRange: string;
+salaryType: string;
+seniorityLevel: string;
+seniorityType: string;
+aboutUs: string;
+datePosted: string;
+dateSaved: string;
+company: string;
+location: string;
+tasks: string;
+requirements: string[];
+benefits: string[];
 }
