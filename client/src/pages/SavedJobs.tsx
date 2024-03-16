@@ -6,12 +6,9 @@ import { fetchSavedJobs, selectSavedJobs } from "../redux/jobs/jobSlice";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { trimJobTitle } from "../utils/trimText";
 
 const SavedJobs = () => {
-  const trimJobTitle = (title: string, maxLength: number) => {
-    return title.length > maxLength ? title.slice(0, maxLength) + "..." : title;
-  };
-
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const job = useSelector(selectSavedJobs);
@@ -52,7 +49,10 @@ const SavedJobs = () => {
               <div className="flex w-full text-gray-500 md:justify-start">
                 {new Date(job.datePosted).toLocaleDateString()}
               </div>
-              <div onClick={() => navigate(`/job/${job.jobId}`)} className="flex w-full font-semibold cursor-pointer md:justify-start">
+              <div
+                onClick={() => navigate(`/job/${job.jobId}`)}
+                className="flex w-full font-semibold cursor-pointer md:justify-start"
+              >
                 {trimJobTitle(job.jobTitle, 35)}
               </div>
               <div className="flex w-full text-gray-500 cursor-pointer md:justify-start">
