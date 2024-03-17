@@ -292,6 +292,7 @@ const CreateJobForm = () => {
                   <p className="text-xs text-gray-400">Example: 2500-3000</p>
                   <FormControl>
                     <Input
+                      type="number"
                       className="transition duration-300 ease-in-out text-slate-500"
                       {...field}
                     />
