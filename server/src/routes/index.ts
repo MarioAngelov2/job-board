@@ -9,6 +9,7 @@ import { addJobSchema, jobValidation } from "../middleware/jobValidation";
 import { deleteSavedJobController } from "../controllers/deleteSavedJob";
 import { uploadFileController } from "../controllers/uploadFile";
 import { applyJobController } from "../controllers/applyJob";
+import { getAppliedJobsController } from "../controllers/getAppliedJobs";
 import multer from "multer";
 
 const router = express.Router();
@@ -26,5 +27,6 @@ router.post("/jobs/savedJobsList", savedJobsController);
 router.post("/jobs/deleteSavedJob", deleteSavedJobController);
 router.post("/files/uploadFile", multer().single("file"), uploadFileController);
 router.post("/jobs/applyJob", applyJobController);
+router.post("/jobs/getAppliedJobs", getAppliedJobsController);
 
 export default router;
