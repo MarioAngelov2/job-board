@@ -25,10 +25,12 @@ import { useParams } from "react-router-dom";
 import { FetchedJob } from "../types/index";
 import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
+import JobDetailsSkeleton from "@/components/JobsDetailsSkeleton";
 
 const JobDetails = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [showTopNav, setShowTopNav] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const id = useParams().id;
   const job = useSelector(selectFetchById);
@@ -49,8 +51,10 @@ const JobDetails = () => {
 
   // FETCHES JOB BY ID
   useEffect(() => {
+    setLoading(true);
+
     if (id && userId) {
-      dispatch(fetchJobById(id));
+      dispatch(fetchJobById(id)).then(() => setLoading(false));
       dispatch(fetchSavedJobs(userId));
     } else {
       return;
@@ -73,6 +77,10 @@ const JobDetails = () => {
 
     toast.success("Job saved successfully");
   };
+
+  if (loading) {
+    return <JobDetailsSkeleton />;
+  }
 
   return (
     <MaxWidthWrapper>
@@ -109,7 +117,10 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div className="justify-end hidden w-full lg:flex">
-                  <ApplyDialog className="gap-2 w-[230px] h-[45px] text-lg">
+                  <ApplyDialog
+                    jobId={id}
+                    className="gap-2 w-[230px] h-[45px] text-lg"
+                  >
                     <LuSend className="text-2xl" />
                     Apply
                   </ApplyDialog>
@@ -155,7 +166,7 @@ const JobDetails = () => {
                     </div>
                   </div>
                   <div className="flex flex-col gap-4 mt-4 md:flex-row">
-                    <ApplyDialog className="mt-0 mb-0 lg:hidden">
+                    <ApplyDialog jobId={id} className="mt-0 mb-0 lg:hidden">
                       <LuSend className="text-xl" />
                       Apply
                     </ApplyDialog>
@@ -176,7 +187,10 @@ const JobDetails = () => {
               {showTopNav && (
                 <div className="fixed left-0 w-full bg-white top-12 h-18 lg:hidden">
                   <div className="flex flex-row items-center justify-center gap-4 px-4 py-4">
-                    <ApplyDialog className="flex items-center w-full md:w-[300px] gap-2 mt-0 mb-0">
+                    <ApplyDialog
+                      jobId={id}
+                      className="flex items-center w-full md:w-[300px] gap-2 mt-0 mb-0"
+                    >
                       <LuSend className="text-lg" />
                       Apply
                     </ApplyDialog>
@@ -232,7 +246,7 @@ const JobDetails = () => {
                 ))}
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
-              <ApplyDialog>
+              <ApplyDialog jobId={id}>
                 <LuSend className="text-xl" />
                 Apply
               </ApplyDialog>
