@@ -44,13 +44,6 @@ const transformedRows = (rows: any) => {
 
 export const getSavedJobs = async (userId: string) => {
   try {
-    const savedJobsCount = await pool.query(
-      SQL`SELECT COUNT(*) as count FROM saved_jobs WHERE user_id = ${userId}`
-    );
-
-    if (savedJobsCount.rows[0].count === "0") {
-      return [];
-    }
 
     const res = await pool.query(
       SQL`SELECT jobs.id as job_id, 
@@ -70,7 +63,7 @@ export const getSavedJobs = async (userId: string) => {
       saved_jobs.date_saved
       FROM jobs 
       INNER JOIN saved_jobs ON jobs.id = saved_jobs.job_id
-      WHERE jobs.user_id = ${userId}`
+      WHERE saved_jobs.user_id = ${userId}`
     );
 
     return transformedRows(res.rows);
