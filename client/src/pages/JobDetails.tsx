@@ -53,7 +53,7 @@ const JobDetails = () => {
   useEffect(() => {
     setLoading(true);
 
-    if (id && userId) {
+    if (id) {
       dispatch(fetchJobById(id)).then(() => setLoading(false));
     }
 
