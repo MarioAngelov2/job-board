@@ -55,9 +55,10 @@ const JobDetails = () => {
 
     if (id && userId) {
       dispatch(fetchJobById(id)).then(() => setLoading(false));
+    }
+
+    if (userId) {
       dispatch(fetchSavedJobs(userId));
-    } else {
-      return;
     }
   }, [dispatch, id, userId]);
 
