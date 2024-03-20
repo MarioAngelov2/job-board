@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { trimJobTitle } from "../utils/trimText";
 
-const MyJobs = () => {
+const AppliedJobs = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { userId } = useAuth();
   const applications = useSelector(selectApplications);
@@ -63,4 +63,4 @@ const MyJobs = () => {
   );
 };
 
-export default MyJobs;
+export default AppliedJobs;

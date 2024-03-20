@@ -11,7 +11,7 @@ import DashboardLayout from "./Layouts/DashboardLayout.tsx";
 
 import SignInPage from "./pages/SignIn.tsx";
 import SignUpPage from "./pages/SignUp.tsx";
-import MyJobs from "./pages/MyJobs.tsx";
+import AppliedJobs from "./pages/AppliedJobs.tsx";
 import Home from "./pages/Home.tsx";
 import JobDetails from "./pages/JobDetails.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         path: "dashboard",
         children: [
-          { path: "/dashboard/my-jobs", element: <MyJobs /> },
+          { path: "/dashboard/applied-jobs", element: <AppliedJobs /> },
           { path: "/dashboard/saved-jobs", element: <SavedJobs /> },
           { path: "/dashboard/create-job", element: <CreateJob /> },
         ],
