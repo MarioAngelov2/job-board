@@ -22,7 +22,7 @@ export const applyJob = async (data: ApplyJob, id: string) => {
         SQL`INSERT 
         INTO applications 
         (
-        id,
+        id_,
         user_id, 
         job_id, 
         name, 

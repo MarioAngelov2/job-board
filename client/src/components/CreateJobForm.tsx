@@ -29,6 +29,7 @@ import { addJob } from "../redux/jobs/jobSlice";
 import { uploadImage, selectImage } from "../redux/jobs/imageSlice";
 import { AppDispatch } from "@/redux/store";
 import { useAuth } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   company: z.string(),
@@ -87,6 +88,7 @@ const CreateJobForm = () => {
     dispatch(addJob(formData));
     setRequirementsList([]);
     setBenefitsList([]);
+    toast.success("Job added successfully");
     form.reset();
   };
 
