@@ -153,7 +153,7 @@ const JobDetails = () => {
                     <div className="flex items-center gap-1 text-gray-500">
                       <BsSuitcaseLg className="text-md lg:text-xl" />
                       <p className="text-sm md:text-base">
-                        {job.seniorityLevel}
+                        {job.seniorityType}
                       </p>
                     </div>
                     <div className="flex items-center gap-1 text-gray-500">
