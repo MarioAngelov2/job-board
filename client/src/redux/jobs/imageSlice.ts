@@ -6,7 +6,7 @@ export const uploadImage = createAsyncThunk(
   async (data: any) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/images/upload-image",
+        "https://job-board-api-l7c8.onrender.com/images/upload-image",
         data
       );
 

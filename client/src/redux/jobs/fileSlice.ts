@@ -13,7 +13,7 @@ export const uploadFile = createAsyncThunk(
   async (data: any) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/files/uploadFile",
+        "https://job-board-api-l7c8.onrender.com/files/uploadFile",
         data
       );
 

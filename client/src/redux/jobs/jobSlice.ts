@@ -46,7 +46,7 @@ const initialState = {
 
 export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
   try {
-    const res = await axios.post("http://localhost:8080/jobs/createJob", data);
+    const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/createJob", data);
 
     return res.data;
   } catch (error) {
@@ -56,7 +56,7 @@ export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
 
 export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async () => {
   try {
-    const res = await axios.get("http://localhost:8080/jobs/getJobs");
+    const res = await axios.get("https://job-board-api-l7c8.onrender.com/jobs/getJobs");
 
     return res.data;
   } catch (error) {
@@ -68,7 +68,7 @@ export const fetchJobById = createAsyncThunk(
   "job/fetchById",
   async (id: string) => {
     try {
-      const res = await axios.get(`http://localhost:8080/jobs/getJob/${id}`);
+      const res = await axios.get(`https://job-board-api-l7c8.onrender.com/jobs/getJob/${id}`);
 
       return res.data;
     } catch (error) {
@@ -81,7 +81,7 @@ export const saveJob = createAsyncThunk(
   "job/saveJob",
   async ({ userId, jobId }: { userId: string; jobId: string }) => {
     try {
-      const res = await axios.post("http://localhost:8080/jobs/saveJob", {
+      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/saveJob", {
         userId,
         jobId,
       });
@@ -97,7 +97,7 @@ export const fetchSavedJobs = createAsyncThunk(
   "job/fetchSavedJobs",
   async (userId: string) => {
     try {
-      const res = await axios.post("http://localhost:8080/jobs/savedJobsList", {
+      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/savedJobsList", {
         userId,
       });
 
@@ -113,7 +113,7 @@ export const deleteSavedJob = createAsyncThunk(
   async (jobId: string) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/jobs/deleteSavedJob",
+        "https://job-board-api-l7c8.onrender.com/jobs/deleteSavedJob",
         { jobId }
       );
 

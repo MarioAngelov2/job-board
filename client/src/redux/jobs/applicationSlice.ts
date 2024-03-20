@@ -44,7 +44,7 @@ export const applyJob = createAsyncThunk(
   "jobs/applyJob",
   async (data: Application) => {
     try {
-      const res = await axios.post("http://localhost:8080/jobs/applyJob", data);
+      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/applyJob", data);
 
       return res.data;
     } catch (error) {
@@ -58,7 +58,7 @@ export const fetchAppliedJobs = createAsyncThunk(
   async (userId: string) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/jobs/getAppliedJobs",
+        "https://job-board-api-l7c8.onrender.com/jobs/getAppliedJobs",
         { userId }
       );
 
