@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { trimJobTitle } from "../utils/trimText";
+import EmptyAppliedJobs from "@/components/EmptyAppliedJobs";
 
 const AppliedJobs = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,10 @@ const AppliedJobs = () => {
 
     dispatch(fetchAppliedJobs(userId));
   }, [dispatch, userId]);
+
+  if (applications.length === 0) {
+    return <EmptyAppliedJobs />;
+  }
 
   return (
     <MaxWidthWrapper>
