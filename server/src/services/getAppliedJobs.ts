@@ -48,12 +48,12 @@ export const getAppliedJobs = async (userId: string) => {
   try {
     const appliedJobs = await pool.query(SQL`
       SELECT 
-      applications.id_ as application_id,
-      applications.applicant_id, 
-      applications.job_id, 
-      applicants.name, 
-      applicants.email, 
-      applications.date_applied,
+      id_,
+      applicant_id, 
+      job_id, 
+      name, 
+      email, 
+      date_applied,
       jobs.company,
       jobs.job_title,
       files.cv_url,
@@ -61,7 +61,6 @@ export const getAppliedJobs = async (userId: string) => {
       FROM applications
       INNER JOIN files ON applications.id_ = files.application_id
       INNER JOIN jobs ON applications.job_id = jobs.id
-      INNER JOIN applicants ON applications.applicant_id = applicants.id
       WHERE applications.applicant_id = ${userId}
       `);
 
