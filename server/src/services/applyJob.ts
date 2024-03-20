@@ -23,7 +23,7 @@ export const applyJob = async (data: ApplyJob, id: string) => {
         INTO applications 
         (
         id_,
-        user_id, 
+        applicant_id, 
         job_id, 
         name, 
         email) 
