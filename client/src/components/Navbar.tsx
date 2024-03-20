@@ -4,7 +4,9 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Button } from "./ui/button";
 import { SignedOut, SignedIn, UserButton } from "@clerk/clerk-react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FcDocument, FcBookmark, FcPlus } from "react-icons/fc";
+import { TiDocumentAdd } from "react-icons/ti";
+import { FaRegBookmark } from "react-icons/fa6";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import {
   Sheet,
   SheetContent,
@@ -84,10 +86,10 @@ const Navbar = () => {
                         className="justify-start w-full text-lg"
                       >
                         <Link
-                          to="/dashboard/my-jobs"
+                          to="/dashboard/applied-jobs"
                           className="flex items-center gap-2"
                         >
-                          <FcDocument className="text-2xl" />
+                          <IoDocumentTextOutline className="text-3xl" />
                           Jobs Applied
                         </Link>
                       </Button>
@@ -96,10 +98,10 @@ const Navbar = () => {
                         className="justify-start w-full text-lg"
                       >
                         <Link
-                          to="/dashboard/my-jobs"
+                          to="/dashboard/saved-jobs"
                           className="flex items-center gap-2"
                         >
-                          <FcBookmark className="text-2xl" />
+                          <FaRegBookmark className="text-2xl" />
                           Saved Jobs
                         </Link>
                       </Button>
@@ -111,7 +113,7 @@ const Navbar = () => {
                           to="/dashboard/create-job"
                           className="flex items-center gap-2"
                         >
-                          <FcPlus className="text-2xl" />
+                          <TiDocumentAdd className="text-3xl" />
                           Create Job
                         </Link>
                       </Button>
