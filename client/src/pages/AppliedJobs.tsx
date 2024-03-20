@@ -9,11 +9,13 @@ import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { trimJobTitle } from "../utils/trimText";
 import EmptyAppliedJobs from "@/components/EmptyAppliedJobs";
+import { useNavigate } from "react-router-dom";
 
 const AppliedJobs = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { userId } = useAuth();
   const applications = useSelector(selectApplications);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!userId) return;
@@ -52,9 +54,9 @@ const AppliedJobs = () => {
               className="flex flex-col gap-2 md:flex-row mt-4 py-5 w-full border-b-[1px]"
             >
               <div className="flex w-full text-gray-500 md:justify-start">
-                {application.dateApplied}
+                {new Date(application.dateApplied).toLocaleDateString()}
               </div>
-              <div className="flex w-full font-semibold cursor-pointer md:justify-start">
+              <div onClick={() => navigate(`/job/${application.jobId}`)} className="flex w-full font-semibold cursor-pointer md:justify-start">
                 {trimJobTitle(application.jobTitle, 35)}
               </div>
               <div className="flex w-full text-gray-500 cursor-pointer md:justify-end">
