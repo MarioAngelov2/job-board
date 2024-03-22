@@ -57,6 +57,7 @@ const JobDetails = () => {
       dispatch(fetchJobById(id)).then(() => setLoading(false));
     }
 
+    // FETCH SAVED JOB IF USER IS LOGGED IN
     if (userId) {
       dispatch(fetchSavedJobs(userId));
     }
