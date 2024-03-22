@@ -9,16 +9,20 @@ dotenv.config();
 
 const app = express();
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(cors({
-    credentials: true,
-    origin: process.env.DEVELOPMENT_ORIGIN,
-  }));
-} else {
-  app.use(cors({
-    credentials: true,
-    origin: process.env.PRODUCTION_ORIGIN,
-  }));
+if (process.env.NODE_ENV === "development") {
+  app.use(
+    cors({
+      credentials: true,
+      origin: process.env.DEVELOPMENT_ORIGIN,
+    })
+  );
+} else if (process.env.NODE_ENV === "production") {
+  app.use(
+    cors({
+      credentials: true,
+      origin: process.env.PRODUCTION_ORIGIN,
+    })
+  );
 }
 
 app.use(compression());

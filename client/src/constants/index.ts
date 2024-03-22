@@ -6,4 +6,12 @@ export const seniorityOptions = [
   { value: "teamLead", label: "Team Lead" },
 ];
 
-export const URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : "https://job-board-api-l7c8.onrender.com";
+let URL;
+
+if (import.meta.env.VITE_NODE_ENV === "development") {
+  URL = import.meta.env.VITE_DEVELOPMENT_ORIGIN 
+} else if (import.meta.env.VITE_NODE_ENV === "production") {
+  URL = import.meta.env.VITE_PRODUCTION_ORIGIN;
+}
+
+export { URL };
