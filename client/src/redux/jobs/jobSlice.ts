@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FetchedJob, SavedJob } from "../../types/index";
+import { URL } from "../../constants/index";
 
 type Job = {
   company: string;
@@ -46,7 +47,7 @@ const initialState = {
 
 export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
   try {
-    const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/createJob", data);
+    const res = await axios.post(`${URL}/jobs/createJob`, data);
 
     return res.data;
   } catch (error) {
@@ -56,7 +57,7 @@ export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
 
 export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async () => {
   try {
-    const res = await axios.get("https://job-board-api-l7c8.onrender.com/jobs/getJobs");
+    const res = await axios.get(`${URL}/jobs/getJobs`);
 
     return res.data;
   } catch (error) {
@@ -68,7 +69,7 @@ export const fetchJobById = createAsyncThunk(
   "job/fetchById",
   async (id: string) => {
     try {
-      const res = await axios.get(`https://job-board-api-l7c8.onrender.com/jobs/getJob/${id}`);
+      const res = await axios.get(`${URL}/jobs/getJob/${id}`);
 
       return res.data;
     } catch (error) {
@@ -81,7 +82,7 @@ export const saveJob = createAsyncThunk(
   "job/saveJob",
   async ({ userId, jobId }: { userId: string; jobId: string }) => {
     try {
-      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/saveJob", {
+      const res = await axios.post(`${URL}/jobs/saveJob`, {
         userId,
         jobId,
       });
@@ -97,7 +98,7 @@ export const fetchSavedJobs = createAsyncThunk(
   "job/fetchSavedJobs",
   async (userId: string) => {
     try {
-      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/savedJobsList", {
+      const res = await axios.post(`${URL}/jobs/savedJobsList`, {
         userId,
       });
 
@@ -112,10 +113,7 @@ export const deleteSavedJob = createAsyncThunk(
   "job/deleteSavedJob",
   async (jobId: string) => {
     try {
-      const res = await axios.post(
-        "https://job-board-api-l7c8.onrender.com/jobs/deleteSavedJob",
-        { jobId }
-      );
+      const res = await axios.post(`${URL}/jobs/deleteSavedJob`, { jobId });
 
       return res.data;
     } catch (error) {

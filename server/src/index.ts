@@ -9,13 +9,17 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors({
     credentials: true,
-    origin: process.env.ORIGIN,
-  })
-);
-
+    origin: process.env.DEVELOPMENT_ORIGIN,
+  }));
+} else {
+  app.use(cors({
+    credentials: true,
+    origin: process.env.PRODUCTION_ORIGIN,
+  }));
+}
 
 app.use(compression());
 app.use(bodyParser.json());

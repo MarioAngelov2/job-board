@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { URL } from "../../constants/index";
 
 type Application = {
   name: string;
@@ -24,8 +25,7 @@ type ApplicationData = {
   applicantId: string;
   jobTitle: string;
   id: string;
-}
-
+};
 
 const initialState = {
   applyJob: {
@@ -44,7 +44,7 @@ export const applyJob = createAsyncThunk(
   "jobs/applyJob",
   async (data: Application) => {
     try {
-      const res = await axios.post("https://job-board-api-l7c8.onrender.com/jobs/applyJob", data);
+      const res = await axios.post(`${URL}/jobs/applyJob`, data);
 
       return res.data;
     } catch (error) {
@@ -57,10 +57,7 @@ export const fetchAppliedJobs = createAsyncThunk(
   "jobs/fetchAppliedJobs",
   async (userId: string) => {
     try {
-      const res = await axios.post(
-        "https://job-board-api-l7c8.onrender.com/jobs/getAppliedJobs",
-        { userId }
-      );
+      const res = await axios.post(`${URL}/jobs/getAppliedJobs`, { userId });
 
       return res.data;
     } catch (error) {

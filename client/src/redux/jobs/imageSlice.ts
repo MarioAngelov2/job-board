@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { URL } from "../../constants/index";
 
 export const uploadImage = createAsyncThunk(
   "image/uploadImage",
   async (data: any) => {
     try {
       const res = await axios.post(
-        "https://job-board-api-l7c8.onrender.com/images/upload-image",
+        `${URL}/images/upload-image`,
         data
       );
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { URL } from "../../constants/index";
 
 const initialState = {
   file: null as string | null,
@@ -13,7 +14,7 @@ export const uploadFile = createAsyncThunk(
   async (data: any) => {
     try {
       const res = await axios.post(
-        "https://job-board-api-l7c8.onrender.com/files/uploadFile",
+        `${URL}/files/uploadFile`,
         data
       );
 
