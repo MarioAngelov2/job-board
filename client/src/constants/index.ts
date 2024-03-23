@@ -1,4 +1,4 @@
-const seniorityOptions = [
+export const seniorityOptions = [
   { value: "intern", label: "Intern" },
   { value: "junior", label: "1-2 years experience" },
   { value: "mid", label: "2-5 years experience" },
@@ -14,4 +14,4 @@ if (import.meta.env.VITE_NODE_ENV === "development") {
   URL = import.meta.env.VITE_PRODUCTION_ORIGIN;
 }
 
-export { URL, seniorityOptions };
+export { URL };
