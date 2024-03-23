@@ -6,7 +6,7 @@ const seniorityOptions = [
   { value: "teamLead", label: "Team Lead" },
 ];
 
-let URL;
+let URL: string;
 
 if (import.meta.env.VITE_NODE_ENV === "development") {
   URL = import.meta.env.VITE_DEVELOPMENT_ORIGIN 
