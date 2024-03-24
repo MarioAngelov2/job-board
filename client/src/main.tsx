@@ -17,6 +17,7 @@ import JobDetails from "./pages/JobDetails.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import SavedJobs from "./pages/SavedJobs.tsx";
 import CreateJob from "./pages/CreateJob.tsx";
+import UpcomingPage from "./components/UpcomingPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/sign-in", element: <SignInPage /> },
       { path: "/sign-up", element: <SignUpPage /> },
       { path: "/job/:id", element: <JobDetails /> },
+      { path: "/upcoming", element: <UpcomingPage /> },
       {
         element: <DashboardLayout />,
         path: "dashboard",
