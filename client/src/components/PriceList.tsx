@@ -3,6 +3,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter } from "../redux/filters/filterSlice";
 import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 const salary = [
   { id: "any", name: "Any", value: "any" },
@@ -16,6 +17,10 @@ const PriceList = () => {
   const selectedLocation = useSelector(
     (state: RootState) => state.filterReducer.salary
   );
+
+  useEffect(() => {
+    dispatch(setFilter({ filterName: "salary", value: "any" }));
+  }, [])
 
   const handleSalaryChange = (value: string) => {
     dispatch(setFilter({ filterName: "salary", value }));

@@ -3,6 +3,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter } from "../redux/filters/filterSlice";
 import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 const experience = [
   { id: "any", name: "Any", value: "any" },
@@ -18,6 +19,10 @@ const SeniorityList = () => {
   const selectedSeiority = useSelector(
     (state: RootState) => state.filterReducer.seniority
   );
+
+  useEffect(() => {
+    dispatch(setFilter({ filterName: "seniority", value: "any" }));
+  }, []);
 
   const handleSeniorityChange = (value: string) => {
     dispatch(setFilter({ filterName: "seniority", value }));
