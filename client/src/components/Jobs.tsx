@@ -49,7 +49,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
     dispatch(fetchJobs()).then(() => {
       setLoading(false);
-    })
+    });
   }, [selectedDatePosted, selectedLocation, selectedSalary, selectedSeniority]);
 
   useEffect(() => {
@@ -156,16 +156,16 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
             <p className="font-semibold text-md md:text-lg">{job.jobTitle}</p>
             <div className="flex flex-row gap-4">
               <div className="flex items-center gap-1 text-gray-500">
-                <CiLocationOn className="text-sm lg:text-xl" />
-                <p className="text-xs md:text-base">{job.location}</p>
+                <CiLocationOn className="text-xl lg:text-xl" />
+                <p className="text-md md:text-base">{job.location}</p>
               </div>
               <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiClock2 className="text-sm lg:text-lg" />
                 <p className="text-sm md:text-base">{job.employmentType}</p>
               </div>
               <div className="flex items-center gap-1 text-gray-500">
-                <PiMoneyLight className="text-sm lg:text-xl" />
-                <p className="text-xs md:text-base">{job.salaryRange}</p>
+                <PiMoneyLight className="text-xl lg:text-xl" />
+                <p className="text-md md:text-base">{job.salaryRange}</p>
               </div>
               <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiCalendarDate className="text-sm lg:text-xl" />
@@ -175,8 +175,8 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
               </div>
             </div>
             <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 md:text-base">
-              <BsSuitcaseLg />
-              {job.seniorityType}
+              <BsSuitcaseLg className="text-lg" />
+              <p className="text-[16px] lg:text-[15px]">{job.seniorityType}</p>
             </div>
           </div>
         </div>
