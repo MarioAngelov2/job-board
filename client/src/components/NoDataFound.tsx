@@ -7,10 +7,10 @@ const NoDataFound = () => {
         <img
           src="/no-data-found.png"
           alt="no data found"
-          className="w-[350px] md:w-[550px] h-auto"
+          className="w-[250px] md:w-[400px] h-auto"
         />
-        <p className="text-xl md:text-2xl mb-1 text-gray-500">No data found</p>
-        <p className="text-lg md:text-2xl mb-12 text-gray-500">Refresh the page or try again later</p>
+        <p className="mb-1 text-xl text-gray-500 md:text-2xl">No data found</p>
+        <p className="mb-12 text-lg text-gray-500 md:text-2xl">Refresh the page or try again later</p>
       </div>
     </MaxWidthWrapper>
   );
