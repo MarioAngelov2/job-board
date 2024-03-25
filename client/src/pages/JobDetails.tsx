@@ -26,6 +26,7 @@ import { FetchedJob } from "../types/index";
 import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 import JobDetailsSkeleton from "@/components/JobsDetailsSkeleton";
+import ApplyButton from "@/components/ApplyButton";
 
 const JobDetails = () => {
   const [isSaved, setIsSaved] = useState(false);
@@ -65,7 +66,7 @@ const JobDetails = () => {
 
   // SAVES USER'S JOB TO DATABASE
   const handleSaveJob = (userId: string | undefined | null, jobId: string) => {
-    if (!userId) return;
+    if (!userId) return toast.error("Please login to save job");
 
     const isJobSaved = savedJobs.some((job) => job.jobId === jobId);
 
@@ -119,13 +120,7 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div className="justify-end hidden w-full lg:flex">
-                  <ApplyDialog
-                    jobId={id}
-                    className="gap-2 w-[230px] h-[45px] text-lg"
-                  >
-                    <LuSend className="text-2xl" />
-                    Apply
-                  </ApplyDialog>
+                  <ApplyButton userId={userId} jobId={job.id} />
                 </div>
               </div>
             </section>
@@ -137,7 +132,7 @@ const JobDetails = () => {
                   <p className="text-xl font-semibold">{job.jobTitle}</p>
                   <div className="flex flex-wrap items-center gap-4 mt-1 md:flex-row">
                     <div className="flex items-center gap-1 text-gray-500">
-                      <CiClock2 className="text-lg lg:text-lg" />
+                      <CiClock2 className="text-lg lg:text-xl" />
                       <p className="text-sm md:text-base">
                         {job.employmentType}
                       </p>
@@ -167,11 +162,10 @@ const JobDetails = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-4 mt-4 md:flex-row">
-                    <ApplyDialog jobId={id} className="mt-0 mb-0 lg:hidden">
-                      <LuSend className="text-xl" />
-                      Apply
-                    </ApplyDialog>
+                  <div className="flex flex-col gap-4 mt-4 md:flex-row md:items-center">
+                    <div className="lg:hidden">
+                      <ApplyButton userId={userId} jobId={job.id} />
+                    </div>
                     <Button
                       onClick={() => handleSaveJob(userId, job.id)}
                       className="flex items-center gap-2 w-full md:w-[300px]"
@@ -189,13 +183,7 @@ const JobDetails = () => {
               {showTopNav && (
                 <div className="fixed left-0 w-full bg-white top-12 h-18 lg:hidden">
                   <div className="flex flex-row items-center justify-center gap-4 px-4 py-4">
-                    <ApplyDialog
-                      jobId={id}
-                      className="flex items-center w-full md:w-[300px] gap-2 mt-0 mb-0"
-                    >
-                      <LuSend className="text-lg" />
-                      Apply
-                    </ApplyDialog>
+                    <ApplyButton userId={userId} jobId={job.id} />
                     <Button
                       onClick={() => handleSaveJob(userId, job.id)}
                       className="flex items-center gap-2 w-full md:w-[300px] h-9"
@@ -248,10 +236,7 @@ const JobDetails = () => {
                 ))}
               </div>
               <hr className="mt-8 mb-8 border-gray-300" />
-              <ApplyDialog jobId={id}>
-                <LuSend className="text-xl" />
-                Apply
-              </ApplyDialog>
+              <ApplyButton userId={userId} jobId={job.id} />
             </section>
           </React.Fragment>
         ))}

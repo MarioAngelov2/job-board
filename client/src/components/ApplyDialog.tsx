@@ -53,6 +53,7 @@ const ApplyDialog = ({ className, children, jobId }: ApplyDialogProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const userCV = useSelector(selectFile);
   const { userId } = useAuth();
+  
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (!jobId) return;
@@ -85,7 +86,7 @@ const ApplyDialog = ({ className, children, jobId }: ApplyDialogProps) => {
       <DialogTrigger asChild>
         <Button
           className={cn(
-            "flex items-center w-full md:w-[300px] mb-12 mt-8 gap-2",
+            "",
             className
           )}
           variant="default"
