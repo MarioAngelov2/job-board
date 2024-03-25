@@ -9,9 +9,7 @@ import {
 } from "react-icons/ci";
 import { PiMoneyLight } from "react-icons/pi";
 import { BsSuitcaseLg } from "react-icons/bs";
-import { LuSend } from "react-icons/lu";
 import { formatDistance } from "date-fns";
-import ApplyDialog from "@/components/ApplyDialog";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
