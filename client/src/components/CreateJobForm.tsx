@@ -7,7 +7,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -32,16 +32,16 @@ import { useAuth } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 
 const formSchema = z.object({
-  company: z.string(),
-  jobTitle: z.string(),
-  location: z.string(),
-  employmentType: z.string(),
-  salaryRange: z.string(),
-  seniorityLevel: z.string(),
-  tasks: z.string(),
-  aboutUs: z.string(),
-  benefits: z.string(),
-  requirements: z.string(),
+  company: z.string().min(1),
+  jobTitle: z.string().min(1),
+  location: z.string().min(1),
+  employmentType: z.string().min(1),
+  salaryRange: z.string().min(1),
+  seniorityLevel: z.string().min(1),
+  tasks: z.string().min(1),
+  aboutUs: z.string().min(1),
+  benefits: z.string().min(1),
+  requirements: z.string().min(1),
   companyLogo: z.object({ file: z.any() }),
 });
 const CreateJobForm = () => {
@@ -77,12 +77,13 @@ const CreateJobForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
     const formData = {
       ...values,
       requirements: requirementsList,
       benefits: benefitsList,
       companyLogo: image,
-      userId
+      userId,
     };
 
     dispatch(addJob(formData));

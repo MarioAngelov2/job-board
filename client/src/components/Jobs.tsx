@@ -165,7 +165,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
               </div>
               <div className="flex items-center gap-1 text-gray-500">
                 <PiMoneyLight className="text-xl lg:text-xl" />
-                <p className="text-md md:text-base">{job.salaryRange}</p>
+                <p className="text-md md:text-base">{job.salaryRange} BGN</p>
               </div>
               <div className="items-center hidden gap-1 text-gray-500 md:flex">
                 <CiCalendarDate className="text-sm lg:text-xl" />
