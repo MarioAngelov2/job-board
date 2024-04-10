@@ -48,7 +48,6 @@ export const fetchJobById = async (id: string) => {
       job_title, 
       location, 
       employment_type, 
-      salary_range, 
       salary_type, 
       seniority_level, 
       seniority_type, 
@@ -58,6 +57,7 @@ export const fetchJobById = async (id: string) => {
       requirements, 
       benefits, 
       user_id,
+      salary_range,
       images.url as logo 
       FROM jobs 
       LEFT JOIN images ON jobs.id = images.job_id 

@@ -36,12 +36,12 @@ const formSchema = z.object({
   jobTitle: z.string().min(1),
   location: z.string().min(1),
   employmentType: z.string().min(1),
-  salaryRange: z.string().min(1),
+  salaryRange: z.coerce.number(),
   seniorityLevel: z.string().min(1),
   tasks: z.string().min(1),
   aboutUs: z.string().min(1),
-  benefits: z.string().min(1),
-  requirements: z.string().min(1),
+  benefits: z.string(),
+  requirements: z.string(),
   companyLogo: z.object({ file: z.any() }),
 });
 const CreateJobForm = () => {
@@ -54,7 +54,7 @@ const CreateJobForm = () => {
       jobTitle: "",
       location: "",
       employmentType: "",
-      salaryRange: "",
+      salaryRange: 0,
       seniorityLevel: "",
       tasks: "",
       aboutUs: "",
@@ -290,9 +290,9 @@ const CreateJobForm = () => {
               control={form.control}
               name="salaryRange"
               render={({ field }) => (
-                <FormItem className="">
+                <FormItem>
                   <FormLabel>Salary Range</FormLabel>
-                  <p className="text-xs text-gray-400">Example: 2500-3000</p>
+                  <p className="text-xs text-gray-400">Example: 3000</p>
                   <FormControl>
                     <Input
                       type="number"

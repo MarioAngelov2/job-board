@@ -8,7 +8,7 @@ type Job = {
   jobTitle: string;
   location: string;
   employmentType: string;
-  salaryRange: string;
+  salaryRange: number;
   seniorityLevel: string;
   aboutUs: string;
   tasks: string;

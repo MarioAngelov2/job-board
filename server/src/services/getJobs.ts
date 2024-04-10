@@ -44,7 +44,6 @@ export const fetchJobs = async () => {
     job_title,
     location,
     employment_type,
-    salary_range,
     salary_type,
     seniority_level,
     seniority_type,
@@ -54,6 +53,7 @@ export const fetchJobs = async () => {
     final_words,
     requirements,
     benefits,
+    salary_range,
     images.url as logo
     FROM jobs
     INNER JOIN (SELECT job_id, url FROM images) AS images

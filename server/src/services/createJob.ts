@@ -21,15 +21,7 @@ export const addJob = async (data: Job) => {
     userId,
   } = data;
 
-  let salaryNumber: number;
-
-  const salaryRangeMatch = salaryRange.match(/^(\d+)-(\d+)$/);
-
-  if (salaryRangeMatch) {
-    salaryNumber = parseInt(salaryRangeMatch[1], 10);
-  } else {
-    salaryNumber = parseInt(salaryRange, 10);
-  }
+  const salaryNumber = Number(salaryRange);
   
   if (salaryNumber >= 0 && salaryNumber <= 2000) {
     salaryType = "lowRange";
@@ -64,7 +56,6 @@ export const addJob = async (data: Job) => {
           job_title, 
           location, 
           employment_type, 
-          salary_range, 
           salary_type, 
           seniority_level, 
           seniority_type, 
@@ -72,13 +63,13 @@ export const addJob = async (data: Job) => {
           about_us,
           requirements, 
           benefits, 
-          user_id) VALUES (
+          user_id,
+          salary_range) VALUES (
             ${id},
             ${company}, 
             ${jobTitle}, 
             ${location}, 
             ${employmentType}, 
-            ${salaryRange}, 
             ${salaryType}, 
             ${seniorityLevel}, 
             ${seniorityType}, 
@@ -86,7 +77,8 @@ export const addJob = async (data: Job) => {
             ${aboutUs},
             ${requirements}, 
             ${benefits}, 
-            ${userId}
+            ${userId},
+            ${salaryRange}
             )`
       );
 

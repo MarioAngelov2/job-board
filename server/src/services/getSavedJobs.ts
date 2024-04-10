@@ -51,7 +51,6 @@ export const getSavedJobs = async (userId: string) => {
       job_title, 
       location, 
       employment_type, 
-      salary_range, 
       salary_type, 
       seniority_level, 
       seniority_type, 
@@ -60,6 +59,7 @@ export const getSavedJobs = async (userId: string) => {
       tasks, 
       requirements, 
       benefits,
+      salary_range, 
       saved_jobs.date_saved
       FROM jobs 
       INNER JOIN saved_jobs ON jobs.id = saved_jobs.job_id
