@@ -51,4 +51,4 @@ The application will get updates and new functionalities.
 <img src="client/public/localhost_5173_ (2).png">
 <img src="client/public/localhost_5173_ (3).png">
 <img width="400" src="client/public/iPhone-13-PRO-MAX-localhost.png">
-<img width="400" src="client/public/iPhone-13-PRO-MAX-localhost.png">
+<img width="400" src="client/public/iPhone-13-PRO-MAX-localhost (2).png">
