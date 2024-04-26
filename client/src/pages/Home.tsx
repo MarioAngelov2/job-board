@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import FilterMenu from "@/components/FilterMenu";
 import Jobs from "@/components/Jobs";
+import { useEffect, useState } from "react";
 
 const formSchema: z.ZodSchema<{ search: string; location: string }> = z.object({
   search: z.string(),
@@ -20,6 +21,8 @@ const formSchema: z.ZodSchema<{ search: string; location: string }> = z.object({
 });
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [locationTerm, setLocationTerm] = useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,6 +34,16 @@ const Home = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
+
+  useEffect(() => {
+    if (form.watch().search.length >= 3 || form.watch().location.length >= 3) {
+      setSearchTerm(form.watch().search);
+      setLocationTerm(form.watch().location);
+    } else {
+      setSearchTerm("");
+      setLocationTerm("");
+    }
+  }, [form.watch().search, form.watch().location]);
 
   return (
     <MaxWidthWrapper>
@@ -89,7 +102,7 @@ const Home = () => {
       {/* FILTER MENU */}
       <div className="lg:flex lg:flex-row lg:gap-6">
         <FilterMenu />
-        <Jobs searchValues={form.getValues()} />
+        <Jobs searchValues={{ search: searchTerm, location: locationTerm }} />
       </div>
     </MaxWidthWrapper>
   );

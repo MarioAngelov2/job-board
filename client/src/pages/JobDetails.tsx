@@ -79,7 +79,7 @@ const JobDetails = () => {
     toast.success("Job saved successfully");
   };
 
-  if (loading) {
+  if (loading && job.length === 0) {
     return <JobDetailsSkeleton />;
   }
 

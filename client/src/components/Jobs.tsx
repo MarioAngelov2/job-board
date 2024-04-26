@@ -47,10 +47,17 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   useEffect(() => {
     setLoading(true);
 
-    dispatch(fetchJobs()).then(() => {
+    dispatch(fetchJobs({ search, location })).then(() => {
       setLoading(false);
     });
-  }, [selectedDatePosted, selectedLocation, selectedSalary, selectedSeniority]);
+  }, [
+    selectedDatePosted,
+    selectedLocation,
+    selectedSalary,
+    selectedSeniority,
+    search,
+    location,
+  ]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -63,17 +70,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
     location,
   ]);
 
-  let filteredJobs = jobs.filter((job: Job) => {
-    const searchMatch =
-      job.jobTitle?.toLowerCase().includes(search.toLowerCase()) ||
-      job.company?.toLowerCase().includes(search.toLowerCase());
-
-    const locationMatch = job.location
-      .toLowerCase()
-      .includes(location.toLowerCase());
-
-    return searchMatch && locationMatch;
-  });
+  let filteredJobs = jobs;
 
   if (selectedLocation && selectedLocation !== "any") {
     filteredJobs = filteredJobs.filter((job: Job) => {
@@ -122,7 +119,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
   const jobsToShow = filteredJobs.slice(startIndex, endIndex);
 
-  if (loading) {
+  if (loading && jobs.length === 0) {
     return <JobsSkeleton />;
   }
 

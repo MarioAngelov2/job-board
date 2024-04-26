@@ -14,14 +14,14 @@ const transformedRows = (rows: any) => {
       date_posted,
       ...row
     }: {
-      job_title: string,
-        employment_type: string,
-        salary_range: string,
-        salary_type: string,
-        seniority_level: string,
-        seniority_type: string,
-        about_us: string,
-        date_posted: string,
+      job_title: string;
+      employment_type: string;
+      salary_range: string;
+      salary_type: string;
+      seniority_level: string;
+      seniority_type: string;
+      about_us: string;
+      date_posted: string;
     }) => ({
       jobTitle: job_title,
       employmentType: employment_type,
@@ -36,9 +36,9 @@ const transformedRows = (rows: any) => {
   );
 };
 
-export const fetchJobs = async () => {
+export const fetchJobs = async (position: string, location: string) => {
   try {
-    const jobs = await pool.query(SQL`SELECT 
+    const jobs = SQL`SELECT 
     id, 
     company, 
     job_title,
@@ -57,9 +57,23 @@ export const fetchJobs = async () => {
     images.url as logo
     FROM jobs
     INNER JOIN (SELECT job_id, url FROM images) AS images
-    ON jobs.id = images.job_id`);
+    ON jobs.id = images.job_id`;
 
-    return transformedRows(jobs.rows);
+    if (position) {
+      jobs.append(SQL` WHERE job_title ILIKE ${"%" + position + "%"}`);
+    }
+
+    if (location) {
+      if (position) {
+        jobs.append(SQL` AND location ILIKE ${"%" + location + "%"}`);
+      } else {
+        jobs.append(SQL` WHERE location ILIKE ${"%" + location + "%"}`);
+      }
+    }
+
+    const { rows } = await pool.query(jobs);
+
+    return transformedRows(rows);
   } catch (error) {
     console.log(error);
     throw new Error("Database update error.");
