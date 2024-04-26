@@ -55,15 +55,20 @@ export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
   }
 });
 
-export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async () => {
-  try {
-    const res = await axios.get(`${URL}/jobs/getJobs`);
+export const fetchJobs = createAsyncThunk(
+  "jobs/fetchJobs",
+  async ({ search, location }: { search: string; location: string }) => {
+    try {
+      const res = await axios.get(
+        `${URL}/jobs/getJobs?position=${search}&location=${location}`
+      );
 
-    return res.data;
-  } catch (error) {
-    console.log(error);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export const fetchJobById = createAsyncThunk(
   "job/fetchById",
