@@ -24,7 +24,10 @@ const initialState = {
     error: null as string | null,
   },
   fetchJobs: {
-    jobs: [] as FetchedJob[],
+    jobs: {
+      data: [] as FetchedJob[],
+      totalCount: "" as string,
+    },
     loading: false,
     error: null as string | null,
   },
@@ -57,10 +60,20 @@ export const addJob = createAsyncThunk("jobs/addJob", async (data: Job) => {
 
 export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
-  async ({ search, location }: { search: string; location: string }) => {
+  async ({
+    search,
+    location,
+    limit,
+    offset,
+  }: {
+    search: string;
+    location: string;
+    limit: number;
+    offset: number;
+  }) => {
     try {
       const res = await axios.get(
-        `${URL}/jobs/getJobs?position=${search}&location=${location}`
+        `${URL}/jobs/getJobs?position=${search}&location=${location}&limit=${limit}&offset=${offset}`
       );
 
       return res.data;
@@ -225,7 +238,11 @@ const jobSlice = createSlice({
 });
 
 export const selectFetchJobs = (state: {
-  jobsReducer: { fetchJobs: { jobs: FetchedJob[] } };
+  jobsReducer: {
+    fetchJobs: {
+      jobs: { data: FetchedJob[]; totalCount: string };
+    };
+  };
 }) => state.jobsReducer.fetchJobs.jobs;
 
 export const selectFetchById = (state: {
