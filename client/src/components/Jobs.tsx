@@ -12,6 +12,7 @@ import PaginationComponent from "./Pagination";
 import NoDataFound from "./NoDataFound";
 import { fetchJobs, selectFetchJobs } from "../redux/jobs/jobSlice";
 import { Job } from "../types/index";
+import { ITEMS_PER_PAGE } from "../constants/index";
 
 interface JobsProps {
   searchValues: {
@@ -20,14 +21,13 @@ interface JobsProps {
   };
 }
 
-const ITEMS_PER_PAGE = 7;
-
 const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const jobs = useSelector(selectFetchJobs);
+  const limit = 7;
 
   const { search, location } = searchValues;
 
@@ -47,7 +47,11 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
   useEffect(() => {
     setLoading(true);
 
-    dispatch(fetchJobs({ search, location })).then(() => {
+    const calculatedOffset = currentPage > 1 ? (currentPage - 1) * limit : 0;
+
+    dispatch(
+      fetchJobs({ search, location, limit, offset: calculatedOffset })
+    ).then(() => {
       setLoading(false);
     });
   }, [
@@ -57,6 +61,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
     selectedSeniority,
     search,
     location,
+    currentPage,
   ]);
 
   useEffect(() => {
@@ -70,7 +75,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
     location,
   ]);
 
-  let filteredJobs = jobs;
+  let filteredJobs = jobs.data;
 
   if (selectedLocation && selectedLocation !== "any") {
     filteredJobs = filteredJobs.filter((job: Job) => {
@@ -112,14 +117,11 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
       }
     });
   }
-  const totalPages = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
 
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const totalJobs = Number(jobs.totalCount);
+  const totalPages = Math.ceil(totalJobs / ITEMS_PER_PAGE);
 
-  const jobsToShow = filteredJobs.slice(startIndex, endIndex);
-
-  if (loading && jobs.length === 0) {
+  if (loading && jobs.data.length === 0) {
     return <JobsSkeleton />;
   }
 
@@ -129,7 +131,7 @@ const Jobs: React.FC<JobsProps> = ({ searchValues }: any) => {
 
   return (
     <div className="flex flex-col w-full min-h-screen gap-4 px-0 py-4 mt-12 bg-white rounded-sm md:px-4">
-      {jobsToShow.map((job: Job) => (
+      {filteredJobs.map((job: Job) => (
         <div
           key={job.id}
           onClick={() => {

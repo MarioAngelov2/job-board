@@ -6,6 +6,8 @@ export const seniorityOptions = [
   { value: "teamLead", label: "Team Lead" },
 ];
 
+export const ITEMS_PER_PAGE = 7;
+
 let URL: string;
 
 if (import.meta.env.VITE_NODE_ENV === "development") {

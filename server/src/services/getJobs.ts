@@ -36,9 +36,14 @@ const transformedRows = (rows: any) => {
   );
 };
 
-export const fetchJobs = async (position: string, location: string) => {
+export const fetchJobs = async (
+  position: string,
+  location: string,
+  offset: number,
+  limit: number
+) => {
   try {
-    const jobs = SQL`SELECT 
+    const jobs = SQL` SELECT 
     id, 
     company, 
     job_title,
@@ -71,9 +76,26 @@ export const fetchJobs = async (position: string, location: string) => {
       }
     }
 
+    const countQuery = SQL`SELECT COUNT(*) from jobs`;
+    if (position || location) {
+      countQuery.append(SQL` WHERE `);
+    }
+    if (position) {
+      countQuery.append(SQL` job_title ILIKE ${"%" + position + "%"}`);
+
+      if (location) {
+        countQuery.append(SQL` AND location ILIKE ${"%" + location + "%"}`);
+      }
+    }
+
+    jobs.append(SQL` ORDER BY id LIMIT ${limit} OFFSET ${offset}`);
+
+    const countResult = await pool.query(countQuery);
+    const totalCount = countResult.rows[0].count;
+
     const { rows } = await pool.query(jobs);
 
-    return transformedRows(rows);
+    return { totalCount, data: transformedRows(rows) };
   } catch (error) {
     console.log(error);
     throw new Error("Database update error.");
